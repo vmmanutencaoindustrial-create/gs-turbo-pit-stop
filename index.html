@@ -1,0 +1,1584 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+<title>GS TURBO PIT STOP — Oficina especializada em motos</title>
+<meta name="description" content="Manutenção, revisão e peças. Sua moto cuidada como deve ser." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Archivo+Black&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#0a0a0a;
+  --bg-2:#141414;
+  --ink:#f5f1ea;
+  --ink-dim:#8e8a82;
+  --accent:#d4142c;          /* RED RACING — paleta GS Turbo */
+  --accent-h:#ff1a3c;
+  --accent-2:#ffc700;        /* amarelo destaque secundário */
+  --accent-3:#ff6b00;        /* glow/fogo */
+  --line:rgba(245,241,234,.08);
+  --grid:1px solid var(--line);
+  --ease:cubic-bezier(.6,.05,.05,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+html{overflow-x:clip}
+body{font-size:16px;line-height:1.45}
+a{color:inherit;text-decoration:none}
+img,canvas{display:block;max-width:100%}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.mono{font-family:'Space Grotesk';font-feature-settings:"tnum";letter-spacing:.02em}
+.display{font-family:'Archivo Black',sans-serif;letter-spacing:-.02em;line-height:.92;text-transform:uppercase}
+.eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim)}
+
+/* === NAV === */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:14px 28px;color:#fff;background:linear-gradient(to bottom,rgba(10,10,10,.85),rgba(10,10,10,.4) 70%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.nav .logo{display:flex;gap:12px;align-items:center;font-family:'Archivo Black';font-size:13px;letter-spacing:.06em}
+.nav .logo svg{height:34px;width:auto;display:block}
+.nav .logo .lockup{display:flex;flex-direction:column;line-height:1}
+.nav .logo .lockup .l1{font-family:'Archivo Black';font-size:14px;letter-spacing:.04em}
+.nav .logo .lockup .l1 b{color:var(--accent)}
+.nav .logo .lockup .l2{font-size:9px;letter-spacing:.32em;color:var(--ink-dim);margin-top:3px}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.5}}
+.nav ul{display:flex;gap:28px;list-style:none;font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+.nav ul a{position:relative;padding:6px 0}
+.nav ul a:hover::after{transform:scaleX(1)}
+.nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:#fff;transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.nav .cta{padding:10px 18px;border:1px solid #fff;border-radius:999px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s}
+.nav .cta:hover{background:#fff;color:#000}
+
+/* === HERO === */
+.hero{min-height:100vh;position:relative;display:flex;align-items:flex-end;padding:120px 28px 40px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 75% 35%,rgba(212,20,44,.18),transparent 65%),radial-gradient(40% 50% at 20% 80%,rgba(255,107,0,.10),transparent 70%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(60% 60% at 50% 50%,#000,transparent 80%);opacity:.5}
+.hero-inner{position:relative;width:100%;display:grid;grid-template-columns:1fr;gap:32px;z-index:2}
+.hero h1{font-size:clamp(64px,14vw,220px);font-family:'Archivo Black';line-height:.86;letter-spacing:-.03em;text-transform:uppercase}
+.hero h1 span{display:block}
+.hero h1 .stroke{-webkit-text-stroke:1px var(--ink);color:transparent}
+.hero h1 .yellow{color:var(--accent);text-shadow:0 0 80px rgba(212,20,44,.45),0 0 160px rgba(255,107,0,.18)}
+.hero-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;border-top:var(--grid);padding-top:24px;margin-top:24px}
+.hero-meta .item .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:8px}
+.hero-meta .item .v{font-family:'Archivo Black';font-size:24px;letter-spacing:-.01em}
+.hero-scroll{position:absolute;right:28px;bottom:28px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-dim);writing-mode:vertical-rl;display:flex;align-items:center;gap:10px}
+.hero-scroll::before{content:"";width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--accent));animation:scrollLine 2s var(--ease) infinite}
+@keyframes scrollLine{0%{transform:translateY(-20px);opacity:0}50%{opacity:1}100%{transform:translateY(20px);opacity:0}}
+
+/* === MARQUEE === */
+.marquee{border-top:var(--grid);border-bottom:var(--grid);overflow:hidden;padding:24px 0;background:#000}
+.marquee-track{display:flex;gap:60px;white-space:nowrap;animation:marquee 38s linear infinite;font-family:'Archivo Black';font-size:64px;text-transform:uppercase;letter-spacing:-.02em}
+.marquee-track span{display:inline-flex;align-items:center;gap:60px}
+.marquee-track .sep{color:var(--accent);font-size:36px}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* === SECTION === */
+section{padding:120px 28px;position:relative}
+.section-head{display:grid;grid-template-columns:120px 1fr;gap:24px;margin-bottom:80px;align-items:start}
+.section-head .num{font-family:'Archivo Black';font-size:14px;color:var(--accent)}
+.section-head h2{font-family:'Archivo Black';font-size:clamp(40px,6vw,84px);line-height:.95;text-transform:uppercase;letter-spacing:-.02em}
+.section-head h2 em{font-style:normal;color:var(--accent)}
+
+/* === MANIFESTO === */
+.manifesto{padding:140px 28px}
+.manifesto p{font-family:'Space Grotesk';font-weight:300;font-size:clamp(28px,4vw,52px);line-height:1.15;letter-spacing:-.01em;max-width:1200px}
+.manifesto p .hl{color:var(--accent);font-weight:500}
+.manifesto p .strike{position:relative;color:var(--ink-dim)}
+.manifesto p .strike::after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:var(--accent-2)}
+
+/* === CONFIGURADOR === */
+.config{background:#000;border-top:var(--grid);border-bottom:var(--grid);padding:80px 0 0}
+.config-shell{display:grid;grid-template-columns:380px 1fr 380px;height:calc(100vh - 160px);min-height:760px;border-top:var(--grid)}
+.config-side{padding:32px;border-right:var(--grid);overflow-y:auto;background:linear-gradient(180deg,#0a0a0a,#050505)}
+.config-side:last-child{border-right:0;border-left:var(--grid)}
+.config-stage{position:relative;background:#000;overflow:hidden;display:flex;align-items:center;justify-content:center}
+
+/* === BIKE PHOTO + ZOOM SYSTEM === */
+.bikePhoto{position:relative;width:100%;height:100%;overflow:hidden;background:#000}
+.bikeImg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 1.1s cubic-bezier(.6,.05,.05,1),filter .8s var(--ease),opacity .4s var(--ease);transform-origin:50% 50%;will-change:transform}
+.bikePhoto .darken{position:absolute;inset:0;background:radial-gradient(circle at var(--fx,50%) var(--fy,50%), transparent 0%, transparent 18%, rgba(0,0,0,.78) 60%);opacity:0;transition:opacity .8s var(--ease);pointer-events:none;z-index:2}
+.bikePhoto.zoomed .darken{opacity:1}
+.hotspots{position:absolute;inset:0;z-index:3;pointer-events:none}
+.hot{position:absolute;transform:translate(-50%,-50%);background:transparent;border:0;cursor:pointer;pointer-events:auto;display:flex;flex-direction:column;align-items:center;gap:8px;padding:0;transition:opacity .35s var(--ease)}
+.hot .dot{width:18px;height:18px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(212,20,44,.7);animation:hotpulse 2s infinite;border:2px solid #fff;transition:all .3s var(--ease)}
+.hot .lbl{font-family:'Archivo Black';font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:rgba(212,20,44,.92);padding:5px 10px;border-radius:999px;white-space:nowrap;opacity:0;transform:translateY(-4px);transition:all .25s var(--ease);box-shadow:0 8px 22px -8px rgba(0,0,0,.6)}
+.hot:hover .lbl,.hot.on .lbl{opacity:1;transform:none}
+.hot:hover .dot,.hot.on .dot{transform:scale(1.4);background:var(--accent-2)}
+.hot.on .dot{animation:none;background:var(--accent-2);box-shadow:0 0 24px var(--accent-2),0 0 48px var(--accent)}
+@keyframes hotpulse{0%{box-shadow:0 0 0 0 rgba(212,20,44,.85)}70%{box-shadow:0 0 0 22px rgba(212,20,44,0)}100%{box-shadow:0 0 0 0 rgba(212,20,44,0)}}
+.bikePhoto.zoomed .hot{opacity:0;pointer-events:none}
+.bikePhoto.zoomed .hot.on{opacity:1;pointer-events:auto}
+.part-label{position:absolute;left:32px;bottom:32px;z-index:4;font-family:'Archivo Black';color:var(--ink);text-transform:uppercase;letter-spacing:.04em;opacity:0;transform:translateY(20px);transition:all .8s var(--ease) .5s;pointer-events:none;max-width:60%}
+.bikePhoto.zoomed .part-label{opacity:1;transform:none}
+.part-label .pl-eyebrow{font-size:11px;letter-spacing:.32em;color:var(--accent);margin-bottom:8px}
+.part-label .pl-name{font-size:clamp(28px,4vw,52px);line-height:.95;text-shadow:0 4px 24px rgba(0,0,0,.9)}
+.part-label .pl-desc{font-family:'Space Grotesk';font-weight:400;font-size:13px;letter-spacing:0;color:var(--ink-dim);margin-top:10px;text-transform:none;line-height:1.4;max-width:380px}
+.part-label .pl-price{display:inline-block;margin-top:16px;padding:8px 14px;background:var(--accent);color:#fff;border-radius:999px;font-size:13px;letter-spacing:.04em}
+.stage-overlay{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:24px}
+.stage-overlay .top,.stage-overlay .bot{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-dim)}
+.stage-overlay .top{padding-top:48px}
+.stage-overlay .bot{flex-direction:column;align-items:center;gap:8px;font-size:10px;letter-spacing:.3em;color:var(--ink-dim);text-transform:uppercase}
+.stage-overlay .bot .hint{color:var(--ink-dim)}
+.stage-overlay .bot .hint span{color:var(--accent)}
+.config-title{font-family:'Archivo Black';font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.config-side h3{font-family:'Archivo Black';font-size:32px;line-height:.95;text-transform:uppercase;margin-bottom:8px}
+.config-side .lead{font-size:13px;color:var(--ink-dim);margin-bottom:32px;line-height:1.5}
+
+.bike-picker{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:28px}
+.bike-pick{padding:12px;border:1px solid var(--line);border-radius:8px;text-align:left;transition:all .3s}
+.bike-pick:hover{border-color:var(--accent)}
+.bike-pick.on{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 8px 30px -10px var(--accent)}
+.bike-pick .nm{font-family:'Archivo Black';font-size:14px;text-transform:uppercase}
+.bike-pick .cc{font-size:10px;letter-spacing:.15em;opacity:.7;margin-top:4px}
+
+.parts-list{display:flex;flex-direction:column;gap:8px}
+.part{display:grid;grid-template-columns:32px 1fr auto;gap:14px;align-items:center;padding:14px 16px;border:1px solid var(--line);border-radius:10px;cursor:pointer;transition:all .25s var(--ease);position:relative;overflow:hidden;text-align:left}
+.part .body{min-width:0;text-align:left}
+.part .body .nm{display:block}
+.part .body .desc{display:block}
+.part:hover{border-color:rgba(212,20,44,.45);transform:translateX(2px)}
+.part.on{border-color:var(--accent);background:rgba(212,20,44,.08)}
+.part.on::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.part .ic{width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--line);border-radius:6px;font-size:14px}
+.part.on .ic{background:var(--accent);color:#fff;border-color:var(--accent)}
+.part .body .nm{font-family:'Archivo Black';font-size:13px;text-transform:uppercase;letter-spacing:.02em}
+.part .body .desc{font-size:11px;color:var(--ink-dim);margin-top:2px}
+.part .price{font-family:'Archivo Black';font-size:14px;color:var(--accent)}
+.part.on .price{color:var(--accent)}
+
+/* right side - cart/summary */
+.summary{display:flex;flex-direction:column;height:100%}
+.cart-list{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:6px;margin:24px 0;min-height:200px}
+.cart-empty{color:var(--ink-dim);font-size:12px;text-align:center;padding:60px 0;letter-spacing:.1em;text-transform:uppercase;opacity:.5}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line);font-size:13px}
+.cart-item .nm{font-family:'Archivo Black';text-transform:uppercase;font-size:12px}
+.cart-item .pr{color:var(--accent);font-family:'Archivo Black'}
+.cart-item button{margin-left:8px;color:var(--ink-dim);font-size:11px}
+.cart-item button:hover{color:var(--accent-2)}
+.summary .total{padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px}
+.summary .total .lbl{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-dim)}
+.summary .total .vl{font-family:'Archivo Black';font-size:42px;color:var(--accent)}
+.summary .time{font-size:11px;color:var(--ink-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:24px;display:flex;justify-content:space-between}
+.summary .time b{color:var(--ink);font-weight:400}
+.btn-go{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;background:var(--accent);color:#fff;border-radius:14px;font-family:'Archivo Black';text-transform:uppercase;letter-spacing:.04em;font-size:14px;transition:all .3s var(--ease);box-shadow:0 12px 40px -16px var(--accent),inset 0 1px 0 rgba(255,255,255,.15)}
+.btn-go:hover{background:var(--accent-h);transform:translateY(-2px);box-shadow:0 24px 60px -20px var(--accent)}
+.btn-go .arr{font-size:24px}
+
+/* presets */
+.presets{margin-bottom:24px}
+.presets-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.preset{padding:10px 8px;border:1px solid var(--line);border-radius:8px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;text-align:center;transition:all .25s}
+.preset:hover{border-color:var(--accent);color:var(--accent)}
+.preset b{display:block;font-family:'Archivo Black';font-size:13px;letter-spacing:.04em;margin-bottom:2px;color:var(--ink)}
+
+/* === SERVICES === */
+.services{padding:140px 28px;border-top:var(--grid)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.svc{background:var(--bg);padding:48px 32px;min-height:340px;display:flex;flex-direction:column;justify-content:space-between;transition:all .4s var(--ease);position:relative;overflow:hidden}
+.svc:hover{background:#000}
+.svc::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);transition:width .5s var(--ease)}
+.svc:hover::after{width:100%}
+.svc .num{font-family:'Archivo Black';font-size:12px;color:var(--accent);letter-spacing:.1em;margin-bottom:24px}
+.svc h3{font-family:'Archivo Black';font-size:32px;line-height:.95;text-transform:uppercase;margin-bottom:16px}
+.svc p{color:var(--ink-dim);font-size:13px;line-height:1.55}
+.svc .arrow{align-self:flex-end;font-size:24px;transform:rotate(-45deg);transition:transform .35s var(--ease);color:var(--accent)}
+.svc:hover .arrow{transform:rotate(0deg)}
+
+/* === STATS === */
+.stats{padding:120px 28px;border-top:var(--grid);background:#000}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:var(--grid);border-bottom:var(--grid)}
+.stat{padding:60px 32px;border-right:var(--grid);text-align:left}
+.stat:last-child{border-right:0}
+.stat .num{font-family:'Archivo Black';font-size:clamp(56px,8vw,128px);line-height:.9;color:var(--ink);letter-spacing:-.03em}
+.stat .num em{color:var(--accent);font-style:normal}
+.stat .lbl{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim);margin-top:14px}
+
+/* === GALERIA / FEED === */
+.feed{padding:120px 28px;border-top:var(--grid)}
+.feed-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.feed-cell{aspect-ratio:1;background:#0a0a0a;position:relative;display:flex;align-items:flex-end;padding:18px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);overflow:hidden;cursor:pointer}
+.feed-cell::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at center,rgba(255,212,0,.06),transparent 60%);transition:opacity .35s}
+.feed-cell:hover::before{opacity:.4}
+.feed-cell svg{position:absolute;inset:0;width:100%;height:100%;color:var(--ink);opacity:.85;transition:transform .6s var(--ease),opacity .35s}
+.feed-cell:hover svg{transform:scale(1.06);opacity:1}
+.feed-cell .lbl{position:relative;z-index:1}
+
+/* === CONTATO === */
+.contact{padding:160px 28px;border-top:var(--grid)}
+.contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:80px}
+.contact h2{font-family:'Archivo Black';font-size:clamp(48px,9vw,140px);line-height:.86;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:32px}
+.contact h2 .y{color:var(--accent)}
+.contact .lead{font-size:18px;color:var(--ink-dim);max-width:520px;line-height:1.5;margin-bottom:48px}
+.contact-info{display:flex;flex-direction:column;gap:24px;border-left:1px solid var(--line);padding-left:32px}
+.contact-info .item .k{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:6px}
+.contact-info .item .v{font-family:'Archivo Black';font-size:18px;text-transform:uppercase}
+.contact-info .item a{color:var(--ink);transition:color .3s}
+.contact-info .item a:hover{color:var(--accent)}
+.contact-cta{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap}
+.contact-cta a{padding:18px 28px;border:1px solid var(--ink);border-radius:999px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-family:'Archivo Black';transition:all .3s var(--ease)}
+.contact-cta a.primary{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 12px 40px -16px var(--accent)}
+.contact-cta a.primary:hover{background:var(--accent-h);transform:translateY(-2px)}
+.contact-cta a:hover{background:var(--ink);color:#000}
+
+/* === FOOTER === */
+footer{border-top:var(--grid);padding:32px 28px;display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim)}
+footer .l{display:flex;gap:24px}
+
+/* === RESPONSIVE === */
+@media (max-width:1100px){
+  .config-shell{grid-template-columns:1fr;height:auto;min-height:0}
+  .config-side{border-right:0;border-bottom:var(--grid)}
+  .config-side:last-child{border-left:0}
+  .config-stage{height:60vh;min-height:480px}
+  .hero-meta{grid-template-columns:repeat(2,1fr)}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:0}
+  .stat:nth-child(1),.stat:nth-child(2){border-bottom:var(--grid)}
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .feed-grid{grid-template-columns:repeat(2,1fr)}
+  .contact-grid{grid-template-columns:1fr;gap:48px}
+  .contact-info{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:32px}
+  .nav ul{display:none}
+}
+@media (max-width:640px){
+  section{padding:80px 18px}
+  .hero{padding:100px 18px 30px}
+  .nav{padding:16px 18px}
+  .marquee-track{font-size:42px}
+  .section-head{grid-template-columns:1fr;gap:8px;margin-bottom:48px}
+  .stats-grid{grid-template-columns:1fr}
+  .stat{border-right:0!important;border-bottom:var(--grid)}
+  .stat:last-child{border-bottom:0}
+  .svc-grid,.feed-grid{grid-template-columns:1fr}
+  .config-stage{height:60vh}
+  .bike-picker{grid-template-columns:1fr}
+}
+
+/* === REVEAL === */
+.r{opacity:0;transform:translateY(40px)}
+.r.on{animation:revealUp .9s var(--ease) forwards}
+@keyframes revealUp{to{opacity:1;transform:none}}
+.r-d2{transition-delay:.12s}
+.r-d3{transition-delay:.24s}
+.r-d4{transition-delay:.36s}
+
+::selection{background:var(--accent);color:#fff}
+
+/* === INTRO CINEMATIC === */
+.intro{position:fixed;inset:0;z-index:99999;background:#000;display:grid;place-items:center;overflow:hidden;pointer-events:auto}
+.intro.gone{pointer-events:none}
+.intro-line{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scaleX(0);width:80vw;height:2px;background:linear-gradient(to right,transparent,var(--accent) 25%,#fff 50%,var(--accent) 75%,transparent);transform-origin:center;animation:introLine 1.2s cubic-bezier(.6,.05,.05,1) forwards;box-shadow:0 0 20px var(--accent),0 0 40px var(--accent-3)}
+@keyframes introLine{0%{transform:translate(-50%,-50%) scaleX(0)}40%{transform:translate(-50%,-50%) scaleX(1)}70%{transform:translate(-50%,-50%) scaleX(1)}100%{transform:translate(-50%,-50%) scaleX(1);opacity:.4}}
+.intro-content{text-align:center;z-index:2;position:relative}
+.intro-eyebrow{font-size:11px;letter-spacing:.42em;color:var(--ink-dim);text-transform:uppercase;opacity:0;animation:introFade .8s var(--ease) .9s forwards;margin-bottom:18px}
+.intro-name{font-family:'Archivo Black';font-size:clamp(38px,7vw,96px);line-height:.92;letter-spacing:-.02em;text-transform:uppercase;color:var(--ink);opacity:0;transform:translateY(40px) skewY(6deg);animation:introNameIn 1s cubic-bezier(.6,.05,.05,1) 1.0s forwards}
+.intro-name b{color:var(--accent)}
+.intro-sub{font-size:11px;letter-spacing:.32em;color:var(--ink-dim);text-transform:uppercase;margin-top:24px;opacity:0;animation:introFade .8s var(--ease) 1.6s forwards}
+@keyframes introFade{to{opacity:1}}
+@keyframes introNameIn{to{opacity:1;transform:none}}
+/* split panels que abrem revelando o site */
+.intro-panel{position:absolute;left:0;right:0;height:50%;background:#000;z-index:3;will-change:transform}
+.intro-panel.top{top:0;border-bottom:1px solid var(--accent);box-shadow:0 4px 30px rgba(212,20,44,.4)}
+.intro-panel.bot{bottom:0;border-top:1px solid var(--accent);box-shadow:0 -4px 30px rgba(212,20,44,.4)}
+.intro.split .intro-panel.top{animation:introTop 1s cubic-bezier(.85,0,.15,1) forwards}
+.intro.split .intro-panel.bot{animation:introBot 1s cubic-bezier(.85,0,.15,1) forwards}
+.intro.split .intro-content,.intro.split .intro-line{opacity:0;transition:opacity .35s}
+@keyframes introTop{to{transform:translateY(-100%)}}
+@keyframes introBot{to{transform:translateY(100%)}}
+.intro.gone{opacity:0;transition:opacity .4s ease 1s;pointer-events:none}
+.intro.gone .intro-panel{display:none}
+
+/* skip link */
+.intro-skip{position:absolute;top:24px;right:24px;z-index:5;font-size:10px;letter-spacing:.32em;color:var(--ink-dim);text-transform:uppercase;cursor:pointer;background:transparent;border:1px solid var(--line);padding:8px 14px;border-radius:999px;opacity:0;animation:introFade .6s var(--ease) 1.8s forwards}
+.intro-skip:hover{color:var(--ink);border-color:var(--ink)}
+
+/* === CUSTOM CURSOR === */
+@media (hover:hover) and (pointer:fine){
+  html{cursor:none}
+  a,button,.hot,.part,.cpart,.bike-pick,.faq-item summary,input,textarea{cursor:none}
+  .cursor-dot{position:fixed;pointer-events:none;width:8px;height:8px;background:var(--accent);border-radius:50%;top:0;left:0;z-index:9999;mix-blend-mode:difference;transition:width .25s var(--ease),height .25s var(--ease),background .25s var(--ease);will-change:transform}
+  .cursor-ring{position:fixed;pointer-events:none;width:36px;height:36px;border:1.5px solid rgba(245,241,234,.5);border-radius:50%;top:0;left:0;z-index:9998;transition:width .3s var(--ease),height .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease);will-change:transform}
+  .cursor-ring.hot{width:60px;height:60px;border-color:var(--accent);border-width:2px;background:rgba(212,20,44,.06)}
+  .cursor-dot.hot{width:14px;height:14px;background:var(--accent-2)}
+  .cursor-ring.click-pulse{animation:clickPulse .6s var(--ease)}
+  @keyframes clickPulse{0%{transform:translate(var(--rx,0),var(--ry,0)) translate(-50%,-50%) scale(1)}50%{transform:translate(var(--rx,0),var(--ry,0)) translate(-50%,-50%) scale(1.6);border-color:var(--accent-2)}100%{transform:translate(var(--rx,0),var(--ry,0)) translate(-50%,-50%) scale(1)}}
+}
+@media (hover:none),(pointer:coarse){.cursor-dot,.cursor-ring{display:none}}
+
+/* === HOVER PARALLAX CARDS === */
+.svc,.gtt,.rev,.feed-cell,.bike-pick,.part{transform-style:preserve-3d;transform:perspective(1000px) rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg)) translateZ(var(--tz,0));will-change:transform}
+.svc:hover,.gtt:hover,.rev:hover,.feed-cell:hover{box-shadow:0 30px 60px -30px rgba(212,20,44,.4)}
+
+/* === SOUND TOGGLE === */
+.sound-toggle{position:fixed;bottom:24px;left:24px;z-index:60;width:44px;height:44px;border-radius:50%;background:rgba(20,20,20,.85);backdrop-filter:blur(8px);border:1px solid var(--line);color:var(--ink-dim);cursor:pointer;display:grid;place-items:center;font-size:18px;transition:all .3s var(--ease)}
+.sound-toggle:hover{border-color:var(--accent);color:var(--accent)}
+.sound-toggle.on{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 30px rgba(212,20,44,.5)}
+@media (hover:hover) and (pointer:fine){.sound-toggle{cursor:none}}
+
+/* === KINETIC TYPE — title scroll-react === */
+.hero h1 .stroke{transition:color 1s var(--ease),-webkit-text-stroke .8s var(--ease)}
+.hero.scrolled h1 .stroke{color:var(--accent);-webkit-text-stroke:1px var(--accent)}
+
+/* === CINEMATIC PARALLAX DEPTH (simplified) === */
+.cineFrame{transform:scale(1) translate3d(0,0,0);transition:transform 1.4s var(--ease),opacity .1s linear}
+.cinematic.in-view .cineFrame{animation:cineParallax 2.4s var(--ease) infinite alternate}
+@keyframes cineParallax{0%{transform:scale(1.03) translate3d(-1%,0,0)}100%{transform:scale(1.06) translate3d(1%,-1%,0)}}
+
+/* === SCRATCH CARD — Canvas trail persistente que revela a moto === */
+.scratch{position:relative;isolation:isolate}
+.scratch-photo{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;background-color:#fff;filter:contrast(1.02) saturate(1.08);z-index:0;pointer-events:none}
+.scratch-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.15) 0%,transparent 25%,transparent 75%,rgba(0,0,0,.05) 100%)}
+.scratch-mask{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;display:block}
+.scratch>*:not(.scratch-photo):not(.scratch-mask){position:relative;z-index:2}
+/* Texto destaca em qualquer fundo via text-shadow forte (legível tanto em preto quanto em branco) */
+.scratch h1, .scratch h2{position:relative;z-index:3}
+.scratch h1, .scratch h2, .scratch h2 em, .scratch h1 .yellow{text-shadow:0 0 1px rgba(0,0,0,.45), 0 4px 30px rgba(0,0,0,.4), 0 0 80px rgba(212,20,44,.3)}
+.scratch .eyebrow, .scratch .num, .scratch .lead, .scratch .sub, .scratch p{text-shadow:0 1px 3px rgba(0,0,0,.85), 0 0 8px rgba(0,0,0,.7), 0 0 24px rgba(0,0,0,.5)}
+/* Hero h1 — palavras brancas (não .yellow) ganham stroke preto sutil pra ler em fundo branco */
+.scratch h1 span:not(.yellow):not(.stroke){-webkit-text-stroke:0px;paint-order:stroke fill;filter:drop-shadow(0 0 1px rgba(0,0,0,.4)) drop-shadow(0 6px 20px rgba(0,0,0,.5))}
+/* Canvas fade-out quando atinge ~22% raspado */
+.scratch-mask{transition:opacity 1.4s cubic-bezier(.6,.05,.05,1)}
+.scratch-mask.revealed{opacity:0}
+
+/* Make hero/manifesto/express/garantia/services scratch-able */
+
+/* Cinematic eyebrow text — make it readable over busy bg */
+.cine-overlay .stage-label .small{background:rgba(0,0,0,.55);padding:8px 16px;border-radius:999px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:inline-block}
+.cine-overlay .stage-label .big{text-shadow:0 4px 24px rgba(0,0,0,.85),0 0 60px rgba(0,0,0,.6)}
+
+/* === CINEMATIC HERO — scroll driven assembly === */
+.cinematic{position:relative;height:300vh;background:#000}
+.cinematic .sticky{position:sticky;top:0;height:100vh;width:100%;overflow:hidden;background:#000}
+.cinematic canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.cineFrame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;will-change:opacity}
+.cineFrame[data-i="0"]{opacity:1}
+.cine-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:48px 32px;pointer-events:none;z-index:2}
+.cine-overlay .top{display:flex;justify-content:space-between;align-items:flex-start;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-dim)}
+.cine-overlay .top .l{display:flex;flex-direction:column;gap:6px}
+.cine-overlay .top .l b{font-family:'Archivo Black';color:var(--ink);font-size:14px;letter-spacing:.06em}
+.cine-overlay .progress{flex:1;max-width:340px;height:1px;background:rgba(245,241,234,.1);margin:0 24px;align-self:center;overflow:hidden;position:relative}
+.cine-overlay .progress .fill{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(to right,var(--accent),var(--accent-h));transition:none}
+.cine-overlay .stage-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;opacity:0;transition:opacity .15s linear}
+.cine-overlay .stage-label.on{opacity:1}
+.cine-overlay .stage-label .small{font-size:11px;letter-spacing:.4em;color:var(--ink-dim);text-transform:uppercase;margin-bottom:18px}
+.cine-overlay .stage-label .big{font-family:'Archivo Black';font-size:clamp(48px,8vw,140px);line-height:.86;text-transform:uppercase;letter-spacing:-.02em}
+.cine-overlay .stage-label .big em{color:var(--accent);font-style:normal}
+.cine-overlay .bottom{display:flex;justify-content:space-between;align-items:flex-end;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-dim)}
+.cine-overlay .bottom .stages{display:flex;gap:18px}
+.cine-overlay .bottom .stage{padding:8px 12px;border:1px solid var(--line);border-radius:999px;transition:all .35s var(--ease);font-family:'Archivo Black';letter-spacing:.16em}
+.cine-overlay .bottom .stage.on{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 30px rgba(212,20,44,.4)}
+
+/* trail line - red light from rear */
+.cine-overlay .trail{position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(to right,transparent,var(--accent) 60%,#fff 90%,transparent);opacity:0;transform:translateY(80px);box-shadow:0 0 20px var(--accent),0 0 40px var(--accent);pointer-events:none}
+.cine-overlay .trail.on{opacity:1;animation:trail 1.4s var(--ease) forwards}
+@keyframes trail{0%{transform:translateY(80px) translateX(-100%);opacity:0}25%{opacity:1}100%{transform:translateY(80px) translateX(100%);opacity:0}}
+
+@media (max-width:780px){
+  .cinematic{height:250vh}
+  .cine-overlay{padding:32px 18px}
+  .cine-overlay .progress{display:none}
+  .cine-overlay .bottom .stages{flex-wrap:wrap;gap:8px;justify-content:flex-end}
+}
+
+/* === BRAND REVEAL (after cinematic) === */
+.reveal{position:relative;min-height:100vh;background:#000;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:80px 28px;border-bottom:var(--grid)}
+.reveal::before{content:"";position:absolute;left:0;right:0;top:50%;height:3px;background:linear-gradient(to right,transparent,var(--accent) 20%,#fff 50%,var(--accent) 80%,transparent);transform:translateY(-50%) scaleX(0);transform-origin:center;transition:transform 1.4s var(--ease);box-shadow:0 0 30px var(--accent),0 0 60px var(--accent-3);z-index:1}
+.reveal.on::before{transform:translateY(-50%) scaleX(1)}
+.reveal::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 40% at 50% 50%,rgba(212,20,44,.18),transparent 70%);opacity:0;transition:opacity 1.6s var(--ease) .4s;pointer-events:none}
+.reveal.on::after{opacity:1}
+.reveal-inner{position:relative;z-index:2;text-align:center;max-width:1400px;width:100%}
+.reveal .eyebrow{opacity:0;transform:translateY(20px);transition:opacity .9s var(--ease) .8s,transform .9s var(--ease) .8s;display:inline-flex;align-items:center;gap:14px;margin-bottom:36px;font-size:11px;letter-spacing:.32em;color:var(--ink-dim);flex-wrap:wrap;justify-content:center}
+.reveal.on .eyebrow{opacity:1;transform:none}
+.reveal .eyebrow b{color:var(--accent-2);font-family:'Archivo Black';letter-spacing:.18em}
+.reveal h2{font-family:'Archivo Black';font-size:clamp(56px,14vw,220px);line-height:.86;letter-spacing:-.03em;text-transform:uppercase;color:var(--ink);margin:0;display:block;text-shadow:0 0 80px rgba(212,20,44,.4)}
+.reveal h2 .word{display:inline-block;opacity:0;transform:translateY(120px) skewY(8deg);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal.on h2 .word{opacity:1;transform:none}
+.reveal h2 .word.w1{transition-delay:1.0s}
+.reveal h2 .word.w2{transition-delay:1.18s;color:var(--accent)}
+.reveal h2 .word.w3{transition-delay:1.34s}
+.reveal h2 .word.w4{transition-delay:1.50s;color:var(--accent)}
+.reveal .sub{margin-top:36px;font-size:clamp(15px,1.4vw,19px);color:var(--ink-dim);line-height:1.55;max-width:680px;margin-left:auto;margin-right:auto;opacity:0;transform:translateY(20px);transition:opacity .9s var(--ease) 1.85s,transform .9s var(--ease) 1.85s}
+.reveal.on .sub{opacity:1;transform:none}
+.reveal .sub b{color:var(--ink);font-weight:500}
+.reveal .ctas{margin-top:48px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap;opacity:0;transform:translateY(20px);transition:opacity .9s var(--ease) 2.1s,transform .9s var(--ease) 2.1s}
+.reveal.on .ctas{opacity:1;transform:none}
+.reveal .ctas a{padding:18px 32px;border-radius:999px;font-family:'Archivo Black';font-size:13px;letter-spacing:.06em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;transition:all .3s var(--ease)}
+.reveal .ctas a.primary{background:var(--accent);color:#fff;box-shadow:0 16px 40px -16px var(--accent)}
+.reveal .ctas a.primary:hover{background:var(--accent-h);transform:translateY(-2px);box-shadow:0 24px 50px -16px var(--accent)}
+.reveal .ctas a.ghost{border:1px solid rgba(245,241,234,.3);color:var(--ink)}
+.reveal .ctas a.ghost:hover{border-color:#fff;background:#fff;color:#000}
+.reveal .speedLine{position:absolute;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--accent) 60%,#fff 90%,transparent);opacity:0;transform:translateX(-100%);box-shadow:0 0 16px var(--accent);pointer-events:none}
+.reveal.on .speedLine{animation:speedFly 1.6s var(--ease) forwards}
+.reveal .speedLine.l1{top:30%;animation-delay:.1s}
+.reveal .speedLine.l2{top:42%;animation-delay:.25s;height:1px;opacity:.6}
+.reveal .speedLine.l3{top:58%;animation-delay:.18s}
+.reveal .speedLine.l4{top:70%;animation-delay:.35s;height:1px;opacity:.5}
+@keyframes speedFly{0%{transform:translateX(-100%);opacity:0}20%{opacity:1}100%{transform:translateX(150%);opacity:0}}
+@media (max-width:780px){.reveal h2{font-size:clamp(46px,16vw,80px)}.reveal{min-height:80vh}}
+
+/* === BG IMAGE LAYER === */
+.bg-img{position:absolute;inset:0;background-size:cover;background-position:center;filter:grayscale(.85) contrast(1.1) brightness(.35);opacity:.45;mix-blend-mode:luminosity;pointer-events:none}
+.bg-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--bg) 0%,transparent 30%,transparent 70%,var(--bg) 100%)}
+
+/* === SOCIAL PROOF BAR === */
+.proof-bar{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;border-top:var(--grid);border-bottom:var(--grid);background:#000;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);gap:24px;flex-wrap:wrap}
+.proof-bar .item{display:flex;gap:10px;align-items:center}
+.proof-bar .item b{font-family:'Archivo Black';color:var(--ink);font-size:13px}
+.proof-bar .item .sm{color:var(--accent-2);font-size:14px}
+.proof-bar .sep{color:var(--line);font-size:8px}
+
+/* === GARANTIA TRIPLA === */
+.guarantee{position:relative;padding:160px 28px;background:linear-gradient(180deg,#000 0%,#0a0a0a 50%,#000 100%);border-top:var(--grid);border-bottom:var(--grid)}
+.guarantee .bg-img{filter:grayscale(.95) contrast(1.2) brightness(.25);opacity:.3}
+.guarantee .head{max-width:1400px;margin:0 auto 80px;position:relative;z-index:2}
+.guarantee .head .num{font-family:'Archivo Black';font-size:14px;color:var(--accent);margin-bottom:16px}
+.guarantee .head h2{font-family:'Archivo Black';font-size:clamp(48px,8vw,120px);line-height:.9;text-transform:uppercase;letter-spacing:-.02em}
+.guarantee .head h2 em{font-style:normal;color:var(--accent);font-style:italic}
+.guarantee .head p{margin-top:24px;font-size:16px;color:var(--ink-dim);max-width:680px;line-height:1.5}
+.gtt-grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1400px;margin:0 auto}
+.gtt{padding:48px 36px;border:1px solid var(--line);border-radius:18px;background:rgba(10,10,10,.7);backdrop-filter:blur(10px);position:relative;overflow:hidden;transition:all .4s var(--ease)}
+.gtt:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 30px 60px -30px var(--accent)}
+.gtt .num{font-family:'Archivo Black';font-size:64px;color:var(--accent);line-height:1;letter-spacing:-.04em;margin-bottom:24px}
+.gtt h3{font-family:'Archivo Black';font-size:22px;line-height:1.05;text-transform:uppercase;margin-bottom:14px}
+.gtt p{color:var(--ink-dim);font-size:14px;line-height:1.55}
+.gtt .seal{position:absolute;top:24px;right:24px;width:44px;height:44px;border:1.5px solid var(--accent);border-radius:50%;display:grid;place-items:center;color:var(--accent);font-size:18px;font-family:'Archivo Black';transform:rotate(-8deg)}
+
+/* === EXPRESS 90MIN === */
+.express{position:relative;padding:160px 28px;overflow:hidden}
+.express .bg-img{filter:grayscale(.7) contrast(1.1) brightness(.3);opacity:.55}
+.express-inner{position:relative;z-index:2;max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:80px;align-items:center}
+.express h2{font-family:'Archivo Black';font-size:clamp(56px,10vw,160px);line-height:.86;text-transform:uppercase;letter-spacing:-.03em}
+.express h2 em{font-style:normal;color:var(--accent)}
+.express .lead{font-size:18px;color:var(--ink-dim);max-width:580px;line-height:1.5;margin-top:24px}
+.express .badge-time{padding:24px 32px;border:1px solid var(--accent);border-radius:18px;background:rgba(212,20,44,.06);text-align:center}
+.express .badge-time .big{font-family:'Archivo Black';font-size:96px;color:var(--accent);line-height:.9;letter-spacing:-.04em}
+.express .badge-time .lbl{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-dim);margin-top:14px}
+.express .badge-time .desc{font-size:13px;color:var(--ink);margin-top:18px;line-height:1.4}
+
+/* === REVIEWS === */
+.reviews{padding:140px 28px;border-top:var(--grid)}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1400px;margin:0 auto}
+.rev{padding:32px 28px;border:1px solid var(--line);border-radius:14px;background:#0c0c0c;display:flex;flex-direction:column;gap:18px;transition:all .35s var(--ease)}
+.rev:hover{border-color:var(--accent-2);transform:translateY(-2px)}
+.rev .stars{color:var(--accent-2);font-size:18px;letter-spacing:.1em}
+.rev p{font-size:15px;line-height:1.55;color:var(--ink)}
+.rev .who{display:flex;justify-content:space-between;align-items:center;color:var(--ink-dim);font-size:11px;letter-spacing:.18em;text-transform:uppercase;border-top:1px dashed var(--line);padding-top:14px;margin-top:auto}
+.rev .who b{font-family:'Archivo Black';color:var(--ink);font-size:12px}
+.rev .badge-g{font-size:10px;color:var(--accent-2);letter-spacing:.2em}
+
+/* === FAQ === */
+.faq{padding:140px 28px;border-top:var(--grid);background:#000}
+.faq-list{max-width:980px;margin:0 auto;border-top:var(--grid)}
+.faq-item{border-bottom:var(--grid);padding:28px 0;cursor:pointer;transition:background .3s}
+.faq-item summary{list-style:none;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;outline:none;cursor:pointer}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{font-family:'Archivo Black';font-size:22px;line-height:1.15;text-transform:uppercase;letter-spacing:-.005em;flex:1}
+.faq-item summary .ic{width:32px;height:32px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;font-size:14px;color:var(--ink-dim);flex-shrink:0;transition:all .3s var(--ease)}
+.faq-item[open] summary .ic{background:var(--accent);border-color:var(--accent);color:#fff;transform:rotate(45deg)}
+.faq-item[open] summary h3{color:var(--accent)}
+.faq-item .answer{padding-top:18px;color:var(--ink-dim);font-size:15px;line-height:1.6;max-width:780px}
+
+/* === STICKY WHATSAPP === */
+.sticky-wa{position:fixed;bottom:24px;right:24px;z-index:60;padding:16px 24px;background:#25d366;color:#fff;border-radius:999px;font-family:'Archivo Black';font-size:13px;letter-spacing:.04em;text-transform:uppercase;display:flex;align-items:center;gap:10px;box-shadow:0 16px 40px -10px rgba(37,211,102,.6),0 0 0 4px rgba(37,211,102,.15);transition:all .3s var(--ease);text-decoration:none}
+.sticky-wa:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 24px 60px -10px rgba(37,211,102,.8)}
+.sticky-wa svg{width:22px;height:22px;fill:currentColor}
+.sticky-wa .pulse{position:absolute;top:0;left:0;right:0;bottom:0;border-radius:999px;background:#25d366;animation:wapulse 2s infinite;opacity:.4;z-index:-1}
+@keyframes wapulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.4);opacity:0}}
+
+@media (max-width:1100px){
+  .gtt-grid{grid-template-columns:1fr;max-width:520px}
+  .rev-grid{grid-template-columns:1fr;max-width:600px}
+  .express-inner{grid-template-columns:1fr;gap:48px}
+  .express .badge-time{max-width:380px}
+  .proof-bar{justify-content:center}
+}
+@media (max-width:640px){
+  .sticky-wa{padding:14px 20px;font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============== INTRO CINEMATIC ============== -->
+<div class="intro" id="intro">
+  <span class="intro-line"></span>
+  <div class="intro-content">
+    <div class="intro-eyebrow">SOROCABA · SP — DESDE 2018</div>
+    <div class="intro-name"><b>GS</b> TURBO <b>PIT</b> STOP</div>
+    <div class="intro-sub">OFICINA ESPECIALIZADA EM MOTOS</div>
+  </div>
+  <button class="intro-skip" id="introSkip">Pular intro →</button>
+  <div class="intro-panel top"></div>
+  <div class="intro-panel bot"></div>
+</div>
+
+<nav class="nav">
+  <a class="logo" href="#">
+    <svg viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="GS Turbo Pit Stop">
+      <defs>
+        <radialGradient id="lg-bg" cx="0.5" cy="0.4" r="0.7">
+          <stop offset="0" stop-color="#1a1a1a"/>
+          <stop offset="1" stop-color="#000"/>
+        </radialGradient>
+        <linearGradient id="lg-gold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#d4a93a"/>
+          <stop offset=".5" stop-color="#f8e8a0"/>
+          <stop offset="1" stop-color="#a07d20"/>
+        </linearGradient>
+      </defs>
+      <!-- outer gold ring -->
+      <circle cx="35" cy="35" r="33" fill="url(#lg-bg)" stroke="url(#lg-gold)" stroke-width="2.2"/>
+      <!-- inner thin ring -->
+      <circle cx="35" cy="35" r="29" fill="none" stroke="url(#lg-gold)" stroke-width="0.6" opacity=".7"/>
+
+      <!-- GS top -->
+      <text x="35" y="18" font-family="Archivo Black, sans-serif" font-size="9" font-weight="900" fill="#dc1431" text-anchor="middle" letter-spacing="0.3">GS</text>
+
+      <!-- TURBO main -->
+      <text x="35" y="32" font-family="Archivo Black, sans-serif" font-size="11" font-weight="900" fill="#dc1431" text-anchor="middle" letter-spacing="-0.2">TURBO</text>
+
+      <!-- PIT STOP -->
+      <text x="35" y="42" font-family="Archivo Black, sans-serif" font-size="6.5" font-weight="900" fill="#dc1431" text-anchor="middle" letter-spacing="0.3">PIT STOP</text>
+
+      <!-- chequered flags -->
+      <g transform="translate(8 22)">
+        <g fill="#f5f1ea"><rect x="0" y="0" width="2" height="2"/><rect x="4" y="0" width="2" height="2"/><rect x="2" y="2" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="4" y="4" width="2" height="2"/></g>
+      </g>
+      <g transform="translate(56 22)">
+        <g fill="#f5f1ea"><rect x="0" y="0" width="2" height="2"/><rect x="4" y="0" width="2" height="2"/><rect x="2" y="2" width="2" height="2"/><rect x="0" y="4" width="2" height="2"/><rect x="4" y="4" width="2" height="2"/></g>
+      </g>
+
+      <!-- rider silhouette in red -->
+      <g transform="translate(35 50)" fill="#dc1431">
+        <ellipse cx="0" cy="0" rx="3" ry="1.5"/>
+        <rect x="-2.2" y="-3.5" width="4.4" height="3" rx="1"/>
+        <circle cx="0" cy="-6" r="1.5"/>
+        <circle cx="-5" cy="3" r="2.5" fill="none" stroke="#dc1431" stroke-width="1"/>
+        <circle cx="5" cy="3" r="2.5" fill="none" stroke="#dc1431" stroke-width="1"/>
+      </g>
+
+      <!-- MOTO PEÇAS -->
+      <text x="35" y="64" font-family="Archivo Black, sans-serif" font-size="4" font-weight="900" fill="url(#lg-gold)" text-anchor="middle" letter-spacing="0.6">MOTO PEÇAS</text>
+    </svg>
+    <span class="lockup">
+      <span class="l1"><b>GS</b> TURBO</span>
+      <span class="l2">PIT · STOP</span>
+    </span>
+  </a>
+  <ul>
+    <li><a href="#manifesto">Sobre</a></li>
+    <li><a href="#config">Configurador</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a class="cta" href="#config">Montar Revisão →</a>
+</nav>
+
+<!-- ============== HERO ============== -->
+<header class="hero scratch" data-bike="assets/sport/ducati.jpg">
+  
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
+      <span class="eyebrow">Oficina especializada em motos · Sorocaba/SP</span>
+      <span class="eyebrow mono"><span style="color:var(--accent-2)">★ 5.0</span> Google · Aberto agora</span>
+    </div>
+    <h1 class="">
+      <span>Sua moto</span>
+      <span class="stroke">no ponto</span>
+      <span class="yellow">certo.</span>
+    </h1>
+    <div class="hero-meta">
+      <div class="item"><div class="k">Manutenção</div><div class="v">Preventiva</div></div>
+      <div class="item"><div class="k">Revisão</div><div class="v">Programada</div></div>
+      <div class="item"><div class="k">Peças</div><div class="v">Originais</div></div>
+      <div class="item"><div class="k">Customização</div><div class="v">Sob medida</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll">SCROLL · MONTE SUA MOTO</div>
+</header>
+
+<!-- ============== CINEMATIC ASSEMBLY ============== -->
+<section class="cinematic" id="cine">
+  <div class="sticky">
+        <div id="cineSvgWrap" style="position:absolute;inset:0;overflow:hidden;background:#000">
+      <img class="cineFrame" data-i="0" src="assets/frames/frame1.jpg" alt="">
+      <img class="cineFrame" data-i="1" src="assets/frames/frame2.jpg" alt="">
+      <img class="cineFrame" data-i="2" src="assets/frames/frame3.jpg" alt="">
+      <img class="cineFrame" data-i="3" src="assets/frames/frame4.jpg" alt="">
+      <img class="cineFrame" data-i="4" src="assets/frames/frame5.jpg" alt="">
+      <img class="cineFrame" data-i="5" src="assets/frames/frame6.jpg" alt="">
+    </div>
+    <div class="cine-overlay">
+      <div class="top">
+        <div class="l"><span>00 / EXPERIÊNCIA</span><b>MONTAGEM EM TEMPO REAL</b></div>
+        <div class="progress"><div class="fill" id="cineFill"></div></div>
+        <div class="l" style="text-align:right"><span>SCROLL DOWN</span><b id="cineStage">EXPLODED</b></div>
+      </div>
+      <div class="stage-label" id="cineLabel0">
+        <div class="small">PASSO 01 · CHASSIS</div>
+        <div class="big">TUDO COMEÇA<br>NO <em>ZERO</em>.</div>
+      </div>
+      <div class="stage-label" id="cineLabel1">
+        <div class="small">PASSO 02 · MOTOR + RODAS</div>
+        <div class="big">O <em>CORAÇÃO</em><br>E AS RODAS.</div>
+      </div>
+      <div class="stage-label" id="cineLabel2">
+        <div class="small">PASSO 03 · SUSPENSÃO</div>
+        <div class="big">SUSPENSÃO<br>NO <em>PONTO</em>.</div>
+      </div>
+      <div class="stage-label" id="cineLabel3">
+        <div class="small">PASSO 04 · TANQUE</div>
+        <div class="big">VERMELHO<br>DE <em>OFICINA</em>.</div>
+      </div>
+      <div class="stage-label" id="cineLabel4">
+        <div class="small">PASSO 05 · PRONTA</div>
+        <div class="big">MONTADA<br>NA <em>NOSSA</em> MÃO.</div>
+      </div>
+      <div class="stage-label" id="cineLabel5">
+        <div class="small">PASSO 06 · ACELERA</div>
+        <div class="big">ACELERA<br>E <em>SOME</em>.</div>
+      </div>
+      <div class="trail" id="cineTrail"></div>
+      <div class="bottom">
+        <span>GS·TURBO · ASSEMBLY ENGINE</span>
+        <div class="stages">
+          <span class="stage on" data-stage="0">DESMONTADA</span>
+          <span class="stage" data-stage="1">MONTANDO</span>
+          <span class="stage" data-stage="2">PRONTA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== BRAND REVEAL ============== -->
+<section class="reveal" id="reveal">
+  <span class="speedLine l1"></span>
+  <span class="speedLine l2"></span>
+  <span class="speedLine l3"></span>
+  <span class="speedLine l4"></span>
+  <div class="reveal-inner">
+    <div class="eyebrow">
+      <span>SOROCABA · SP</span><span style="color:var(--line)">●</span>
+      <b>★ 5.0 GOOGLE</b><span style="color:var(--line)">●</span>
+      <span>4.517 SEGUIDORES</span>
+    </div>
+    <h2>
+      <span class="word w1">GS</span>
+      <span class="word w2">TURBO</span>
+      <span class="word w3">PIT</span>
+      <span class="word w4">STOP</span>
+    </h2>
+    <p class="sub">Oficina especializada em motos. <b>Garantia tripla por escrito</b>. Pit Stop Express em <b>90 minutos</b>. Sem enrolação, sem letra miúda — sua moto no ponto certo.</p>
+    <div class="ctas">
+      <a href="#config" class="primary">Montar minha revisão →</a>
+      <a href="https://wa.me/5511948280775?text=Vim%20do%20site%20da%20GS%20Turbo%20Pit%20Stop" target="_blank" class="ghost">Falar no WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SOCIAL PROOF ============== -->
+<div class="proof-bar">
+  <div class="item"><span class="sm">★★★★★</span> <b>5.0</b> <span>Google</span></div>
+  <span class="sep">●</span>
+  <div class="item"><b>4.517</b> <span><a href="https://instagram.com/gs_turbo_pit_stop" target="_blank" style="color:inherit">seguidores @gs_turbo_pit_stop</a></span></div>
+  <span class="sep">●</span>
+  <div class="item"><b>90 min</b> <span>Pit Stop Express</span></div>
+  <span class="sep">●</span>
+  <div class="item"><b>90 dias</b> <span>Garantia escrita</span></div>
+  <span class="sep">●</span>
+  <div class="item"><b>7 dias</b> <span>Aberto · fecha 00h</span></div>
+</div>
+
+<!-- ============== MARQUEE ============== -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>ÓLEO <span class="sep">●</span> FREIO <span class="sep">●</span> SUSPENSÃO <span class="sep">●</span> CORRENTE <span class="sep">●</span> EMBREAGEM <span class="sep">●</span> PNEU <span class="sep">●</span> VELA <span class="sep">●</span> FILTRO <span class="sep">●</span></span>
+    <span>ÓLEO <span class="sep">●</span> FREIO <span class="sep">●</span> SUSPENSÃO <span class="sep">●</span> CORRENTE <span class="sep">●</span> EMBREAGEM <span class="sep">●</span> PNEU <span class="sep">●</span> VELA <span class="sep">●</span> FILTRO <span class="sep">●</span></span>
+  </div>
+</div>
+
+<!-- ============== MANIFESTO ============== -->
+<section class="manifesto scratch" data-bike="assets/sport/bmw.jpg" id="manifesto" style="position:relative;overflow:hidden">
+  <div class="bg-img" style="background-image:url('https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=1800&q=80')"></div>
+  <div style="position:relative;z-index:2">
+    <div class="section-head">
+      <div class="num r">01 / MANIFESTO</div>
+      <h2 class="r">Aqui sua moto<br><em>não improvisa.</em></h2>
+    </div>
+    <p class="r">
+      Sua moto não é só transporte — é o seu <span class="hl">dia a dia</span>.
+      A gente trata cada parafuso como se fosse <span class="hl">a nossa</span>.
+      Sem improviso, sem <span class="strike">jeitinho</span>, sem desculpa.
+      Cada peça <span class="hl">no ponto certo.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============== EXPRESS 90 MIN ============== -->
+<section class="express scratch" data-bike="assets/sport/kawasaki.jpg">
+  <div class="bg-img" style="background-image:url('https://images.unsplash.com/photo-1622185135505-2d795003994a?auto=format&fit=crop&w=1800&q=80')"></div>
+  <div class="express-inner">
+    <div>
+      <div class="num r" style="font-family:'Archivo Black';font-size:14px;color:var(--accent);margin-bottom:24px">02 / PIT STOP EXPRESS</div>
+      <h2 class="r">Revisão <em>em 90<br>minutos.</em><br>Garantida.</h2>
+      <p class="lead r">Para Honda CG, Biz, Pop e Bros, fazemos a revisão básica enquanto você toma um café. Cronômetro do balcão. Se passar de 90 min, R$ 50 voltam pro seu bolso. Pensado pra <b style="color:var(--ink)">motoboy</b>, <b style="color:var(--ink)">app</b> e <b style="color:var(--ink)">quem precisa da moto pra ontem.</b></p>
+    </div>
+    <div class="badge-time r">
+      <div class="big">90<span style="font-size:42px">min</span></div>
+      <div class="lbl">Cronometrado</div>
+      <div class="desc">Óleo + filtro + revisão de 12 pontos +<br>limpeza de freios + checklist completo</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== GARANTIA TRIPLA ============== -->
+<section class="guarantee scratch" data-bike="assets/sport/yamaha.jpg">
+  <div class="bg-img" style="background-image:url('https://images.unsplash.com/photo-1601455763557-db1bea8a9a5a?auto=format&fit=crop&w=1800&q=80')"></div>
+  <div class="head">
+    <div class="num r">03 / GARANTIA TRIPLA</div>
+    <h2 class="r">Sem letra<br>miúda. <em>Por escrito.</em></h2>
+    <p class="r">A maior dor de quem leva moto na oficina é o medo de ser enganado. A gente acabou com isso. Toda revisão sai com <b style="color:var(--ink)">3 garantias documentadas</b>, impressas e entregues junto com a moto.</p>
+  </div>
+  <div class="gtt-grid">
+    <div class="gtt r">
+      <div class="seal">★</div>
+      <div class="num">01</div>
+      <h3>90 dias no serviço</h3>
+      <p>Qualquer problema relacionado à mão de obra dos primeiros 90 dias após a revisão? Voltou. Refazemos sem cobrar. Garantia válida em recibo.</p>
+    </div>
+    <div class="gtt r r-d2">
+      <div class="seal">✓</div>
+      <div class="num">02</div>
+      <h3>Peça com NF rastreável</h3>
+      <p>Toda peça vem com nota fiscal e foto da embalagem original. Você sabe exatamente o que entrou na sua moto e onde foi comprada. Zero peça falsa.</p>
+    </div>
+    <div class="gtt r r-d3">
+      <div class="seal">$</div>
+      <div class="num">03</div>
+      <h3>Sem surpresa no orçamento</h3>
+      <p>Se cobrarmos um centavo a mais do que orçamos antes do serviço, é por nossa conta. Orçamento por foto/vídeo, fechado por WhatsApp, com seu OK.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CONFIGURADOR 3D ============== -->
+<section class="config" id="config">
+  <div style="max-width:1600px;margin:0 auto;padding:0 28px 60px">
+    <div class="section-head">
+      <div class="num r">02 / CONFIGURADOR</div>
+      <h2 class="r">Monte sua<br><em>revisão completa.</em></h2>
+    </div>
+  </div>
+
+  <div class="config-shell">
+
+    <!-- ESQUERDA: ESCOLHA DA MOTO + PEÇAS -->
+    <aside class="config-side">
+      <div class="config-title">PASSO 01</div>
+      <h3>Sua moto</h3>
+      <p class="lead">Escolha o modelo. O configurador adapta peças e preços ao tipo de motor.</p>
+      <div class="bike-picker" id="bikePicker">
+        <button class="bike-pick on" data-bike="cg160" data-mult="1"><span class="nm">Honda CG 160</span><span class="cc">Fan · Start · Titan</span></button>
+        <button class="bike-pick" data-bike="biz125" data-mult="0.95"><span class="nm">Honda Biz 125</span><span class="cc">125cc · automática</span></button>
+        <button class="bike-pick" data-bike="pop110" data-mult="0.9"><span class="nm">Honda Pop 110i</span><span class="cc">109cc · econômica</span></button>
+        <button class="bike-pick" data-bike="bros160" data-mult="1.15"><span class="nm">Honda Bros 160</span><span class="cc">NXR · trail leve</span></button>
+        <button class="bike-pick" data-bike="fazer250" data-mult="1.35"><span class="nm">Yamaha Fazer 250</span><span class="cc">FZ25 · naked</span></button>
+        <button class="bike-pick" data-bike="xre300" data-mult="1.55"><span class="nm">Honda XRE 300</span><span class="cc">big trail</span></button>
+      </div>
+
+      <div class="config-title" style="margin-top:8px">PASSO 02</div>
+      <h3 style="font-size:24px">Peças & serviços</h3>
+      <p class="lead">Clique nas peças. Cada item destaca a região correspondente da moto 3D.</p>
+
+      <div class="parts-list" id="partsList">
+        <button class="part" data-id="oleo" data-base="180" data-time="30"><span class="ic">⚙︎</span><span class="body"><span class="nm">Troca de óleo + filtro</span><span class="desc">Óleo sintético 10W40 — recomendado a cada 3.000 km</span></span><span class="price">R$ 180</span></button>
+        <button class="part" data-id="freio" data-base="240" data-time="40"><span class="ic">◯</span><span class="body"><span class="nm">Freio dianteiro + traseiro</span><span class="desc">Pastilhas + sangria + ajuste de manete</span></span><span class="price">R$ 240</span></button>
+        <button class="part" data-id="suspensao" data-base="320" data-time="60"><span class="ic">∥</span><span class="body"><span class="nm">Revisão da suspensão</span><span class="desc">Bengala dianteira + amortecedor + retentor</span></span><span class="price">R$ 320</span></button>
+        <button class="part" data-id="corrente" data-base="160" data-time="25"><span class="ic">≈</span><span class="body"><span class="nm">Kit relação (corrente)</span><span class="desc">Lubrificação + tensionamento + alinhamento</span></span><span class="price">R$ 160</span></button>
+        <button class="part" data-id="embreagem" data-base="280" data-time="50"><span class="ic">◐</span><span class="body"><span class="nm">Embreagem</span><span class="desc">Discos + ajuste de cabo + sangria hidráulica</span></span><span class="price">R$ 280</span></button>
+        <button class="part" data-id="pneu" data-base="420" data-time="35"><span class="ic">◉</span><span class="body"><span class="nm">Pneus dianteiro + traseiro</span><span class="desc">Mão de obra + balanceamento (peça à parte)</span></span><span class="price">R$ 420</span></button>
+        <button class="part" data-id="vela" data-base="90" data-time="15"><span class="ic">⚡</span><span class="body"><span class="nm">Velas + filtro de ar</span><span class="desc">Limpeza + troca de velas + filtro novo</span></span><span class="price">R$ 90</span></button>
+        <button class="part" data-id="custom" data-base="450" data-time="90"><span class="ic">★</span><span class="body"><span class="nm">Customização (escape/guidão)</span><span class="desc">Ponteira esportiva, guidão, manopla, mão de obra</span></span><span class="price">R$ 450</span></button>
+      </div>
+    </aside>
+
+    <!-- CENTRO: FOTO HORNET + HOTSPOTS COM ZOOM -->
+    <div class="config-stage">
+      <div id="bikePhoto" class="bikePhoto">
+        <img id="bikeImg" class="bikeImg" src="assets/bikes/cg160.jpg" alt="Moto selecionada">
+        <div class="darken"></div>
+        <div class="hotspots" id="hotspots">
+          <button class="hot" data-cat="oleo"      style="left:54%;top:62%"><span class="dot"></span><span class="lbl">Óleo + filtro</span></button>
+          <button class="hot" data-cat="freio"     style="left:80%;top:78%"><span class="dot"></span><span class="lbl">Freios</span></button>
+          <button class="hot" data-cat="suspensao" style="left:78%;top:55%"><span class="dot"></span><span class="lbl">Suspensão</span></button>
+          <button class="hot" data-cat="corrente"  style="left:30%;top:73%"><span class="dot"></span><span class="lbl">Corrente</span></button>
+          <button class="hot" data-cat="embreagem" style="left:50%;top:65%"><span class="dot"></span><span class="lbl">Embreagem</span></button>
+          <button class="hot" data-cat="pneu"      style="left:20%;top:82%"><span class="dot"></span><span class="lbl">Pneus</span></button>
+          <button class="hot" data-cat="vela"      style="left:55%;top:55%"><span class="dot"></span><span class="lbl">Vela</span></button>
+          <button class="hot" data-cat="custom"    style="left:42%;top:36%"><span class="dot"></span><span class="lbl">Customização</span></button>
+        </div>
+        <div class="part-label" id="partLabel"></div>
+      </div>
+      <div class="stage-overlay">
+        <div class="top">
+          <span>VIEW · 3D MOTO</span>
+          <span id="bikeLabel">STREET · 125–250cc</span>
+        </div>
+        <div class="bot">
+          <span class="hint">ARRASTE PARA GIRAR · <span>CLIQUE NAS PEÇAS DESTACADAS</span></span>
+          <span style="display:flex;justify-content:space-between;width:100%;align-items:center"><span id="hintBot">Selecione um item para ver na moto</span><span class="mono">v.1 · GS-CFG</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIREITA: SUMÁRIO / CARRINHO -->
+    <aside class="config-side summary">
+      <div class="config-title">PASSO 03</div>
+      <h3>Sua revisão</h3>
+      <p class="lead">Pacotes prontos ou monte manualmente. Tempo e preço atualizam em tempo real.</p>
+
+      <div class="presets">
+        <div class="presets-row">
+          <button class="preset" data-set="oleo,vela"><b>BÁSICO</b>óleo + vela</button>
+          <button class="preset" data-set="oleo,freio,corrente,vela"><b>COMPLETO</b>revisão programada</button>
+          <button class="preset" data-set="oleo,freio,corrente,embreagem,suspensao,pneu,vela,custom"><b>FULL</b>tudo + custom</button>
+        </div>
+      </div>
+
+      <div class="cart-list" id="cart">
+        <div class="cart-empty">Nenhuma peça selecionada</div>
+      </div>
+
+      <div class="time"><span>TEMPO ESTIMADO</span><b id="totalTime">0 min</b></div>
+      <div class="total"><span class="lbl">Total estimado</span><span class="vl" id="totalPrice">R$ 0</span></div>
+
+      <a id="goWa" class="btn-go" href="#" target="_blank" rel="noopener">
+        <span>Agendar no WhatsApp</span><span class="arr">→</span>
+      </a>
+    </aside>
+
+  </div>
+</section>
+
+<!-- ============== STATS ============== -->
+<section class="stats">
+  <div class="section-head">
+    <div class="num r">03 / NÚMEROS</div>
+    <h2 class="r">Não é papo,<br><em>é histórico.</em></h2>
+  </div>
+  <div class="stats-grid">
+    <div class="stat r"><div class="num" data-target="2400" data-suffix="+">0</div><div class="lbl">Motos atendidas</div></div>
+    <div class="stat r r-d2"><div class="num" data-target="98" data-suffix="%">0</div><div class="lbl">Voltam para revisão</div></div>
+    <div class="stat r r-d3"><div class="num" data-target="48" data-suffix="h">0</div><div class="lbl">Prazo médio</div></div>
+    <div class="stat r r-d4"><div class="num"><em>4.9</em>★</div><div class="lbl">Avaliação Google</div></div>
+  </div>
+</section>
+
+<!-- ============== SERVIÇOS ============== -->
+<section class="services scratch" id="servicos" data-bike="assets/sport/suzuki.jpg">
+  <div class="section-head">
+    <div class="num r">04 / SERVIÇOS</div>
+    <h2 class="r">O que <em>fazemos</em><br>de olhos fechados.</h2>
+  </div>
+  <div class="svc-grid">
+    <div class="svc r"><div><div class="num">/ 01</div><h3>Manutenção preventiva</h3><p>Antes de quebrar. Inspeção em 32 pontos, troca de fluidos, ajustes finos. Sua moto sai melhor do que chegou.</p></div><div class="arrow">↗</div></div>
+    <div class="svc r r-d2"><div><div class="num">/ 02</div><h3>Revisão programada</h3><p>Seguindo o manual da fabricante — sem perder a garantia, sem inflar serviço. Revisão honesta a cada 3 mil ou 6 mil km.</p></div><div class="arrow">↗</div></div>
+    <div class="svc r r-d3"><div><div class="num">/ 03</div><h3>Customização</h3><p>Escape, guidão, banco, lanterna, capa. Sua moto com a sua cara — instalada por quem entende e não quebra.</p></div><div class="arrow">↗</div></div>
+    <div class="svc r"><div><div class="num">/ 04</div><h3>Pneus & rodas</h3><p>Montagem, balanceamento e geometria. Pneu certo pra cada perfil de pilotagem — urbano, trilha ou misto.</p></div><div class="arrow">↗</div></div>
+    <div class="svc r r-d2"><div><div class="num">/ 05</div><h3>Diagnóstico eletrônico</h3><p>Scanner de injeção, leitura de sensores, ABS, painel, bateria, partida. Acabamos com aquele “acho que é”.</p></div><div class="arrow">↗</div></div>
+    <div class="svc r r-d3"><div><div class="num">/ 06</div><h3>Peças com entrega</h3><p>Originais e paralelas testadas. Cotamos rápido, instalamos no mesmo dia quando dá. Sem pegadinha, sem enrolação.</p></div><div class="arrow">↗</div></div>
+  </div>
+</section>
+
+<!-- ============== FEED ============== -->
+<section class="feed">
+  <div class="section-head">
+    <div class="num r">05 / FEED</div>
+    <h2 class="r">Bastidores da<br><em>oficina.</em></h2>
+  </div>
+  <div class="feed-grid">
+    <a class="feed-cell r" href="https://instagram.com/gs_turbo_pit_stop" target="_blank">
+      <div style="position:absolute;inset:0;background-image:url('assets/feed/forca.jpg');background-size:cover;background-position:center;filter:grayscale(.7) contrast(1.1) brightness(.55)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.85))"></div>
+      <span class="lbl" style="color:#dc1431;font-family:'Archivo Black';font-size:14px;letter-spacing:.04em;z-index:2;text-transform:uppercase">FORÇA NA MOTO</span>
+    </a>
+    <a class="feed-cell r r-d2" href="https://instagram.com/gs_turbo_pit_stop" target="_blank">
+      <div style="position:absolute;inset:0;background-image:url('assets/feed/ponto-certo.jpg');background-size:cover;background-position:center;filter:grayscale(.7) contrast(1.1) brightness(.55)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.85))"></div>
+      <span class="lbl" style="color:#dc1431;font-family:'Archivo Black';font-size:14px;letter-spacing:.04em;z-index:2;text-transform:uppercase">NO PONTO CERTO</span>
+    </a>
+    <a class="feed-cell r r-d3" href="https://instagram.com/gs_turbo_pit_stop" target="_blank">
+      <div style="position:absolute;inset:0;background-image:url('assets/feed/rodar-melhor.jpg');background-size:cover;background-position:center;filter:grayscale(.7) contrast(1.1) brightness(.55)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.85))"></div>
+      <span class="lbl" style="color:#dc1431;font-family:'Archivo Black';font-size:14px;letter-spacing:.04em;z-index:2;text-transform:uppercase">RODAR MELHOR</span>
+    </a>
+    <a class="feed-cell r r-d4" href="https://instagram.com/gs_turbo_pit_stop" target="_blank">
+      <div style="position:absolute;inset:0;background-image:url('assets/feed/sem-enrolacao.jpg');background-size:cover;background-position:center;filter:grayscale(.7) contrast(1.1) brightness(.55)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.85))"></div>
+      <span class="lbl" style="color:#dc1431;font-family:'Archivo Black';font-size:14px;letter-spacing:.04em;z-index:2;text-transform:uppercase">SEM ENROLAÇÃO</span>
+    </a>
+    <a class="feed-cell r" href="https://instagram.com/gs_turbo_pit_stop" target="_blank">
+      <div style="position:absolute;inset:0;background-image:url('assets/feed/cg160-titan.jpg');background-size:cover;background-position:center;filter:grayscale(.7) contrast(1.1) brightness(.55)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.85))"></div>
+      <span class="lbl" style="color:#dc1431;font-family:'Archivo Black';font-size:14px;letter-spacing:.04em;z-index:2;text-transform:uppercase">CG 160 TITAN</span>
+    </a>
+    <a class="feed-cell r r-d2" href="https://instagram.com/gs_turbo_pit_stop" target="_blank">
+      <div style="position:absolute;inset:0;background-image:url('assets/feed/nxr-bros.jpg');background-size:cover;background-position:right;filter:grayscale(.7) contrast(1.1) brightness(.55)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.85))"></div>
+      <span class="lbl" style="color:#dc1431;font-family:'Archivo Black';font-size:14px;letter-spacing:.04em;z-index:2;text-transform:uppercase">NXR 160 BROS</span>
+    </a>
+    <a class="feed-cell r r-d3" href="https://instagram.com/gs_turbo_pit_stop" target="_blank">
+      <div style="position:absolute;inset:0;background-image:url('assets/feed/pneu-seguro.jpg');background-size:cover;background-position:left;filter:grayscale(.7) contrast(1.1) brightness(.55)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.85))"></div>
+      <span class="lbl" style="color:#dc1431;font-family:'Archivo Black';font-size:14px;letter-spacing:.04em;z-index:2;text-transform:uppercase">PNEU SEGURO</span>
+    </a>
+    <a class="feed-cell r r-d4" href="https://instagram.com/gs_turbo_pit_stop" target="_blank">
+      <div style="position:absolute;inset:0;background-image:url('assets/feed/evita-prejuizo.jpg');background-size:cover;background-position:bottom;filter:grayscale(.7) contrast(1.1) brightness(.55)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.85))"></div>
+      <span class="lbl" style="color:#dc1431;font-family:'Archivo Black';font-size:14px;letter-spacing:.04em;z-index:2;text-transform:uppercase">EVITA PREJUÍZO</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============== REVIEWS GOOGLE ============== -->
+<section class="reviews scratch" data-bike="assets/sport/aprilia.jpg">
+  <div class="section-head">
+    <div class="num r">07 / REVIEWS GOOGLE</div>
+    <h2 class="r">Quem passou aqui<br><em>volta.</em></h2>
+  </div>
+  <div class="rev-grid">
+    <div class="rev r">
+      <div class="stars">★ ★ ★ ★ ★</div>
+      <p>"Peças top, atendimento rápido e serviço que <b>resolve sem enrolação</b>. Minha CG voltou nova."</p>
+      <div class="who"><b>Cliente verificado</b><span class="badge-g">★ Google</span></div>
+    </div>
+    <div class="rev r r-d2">
+      <div class="stars">★ ★ ★ ★ ★</div>
+      <p>"Levei a Bros 160 com freio sangrando e <b>em 1h tava pronta</b>. Orçamento certinho, sem aumentar nada depois. Recomendo."</p>
+      <div class="who"><b>Motoboy iFood</b><span class="badge-g">★ Google</span></div>
+    </div>
+    <div class="rev r r-d3">
+      <div class="stars">★ ★ ★ ★ ★</div>
+      <p>"Outras 3 oficinas falaram que era câmbio. Aqui descobriram em 15 min que era só a corrente. <b>Pagaria 4x mais e ainda compensaria.</b>"</p>
+      <div class="who"><b>Cliente verificado</b><span class="badge-g">★ Google</span></div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:48px"><a href="https://www.google.com/maps/search/gs+turbo+pit+stop+sorocaba" target="_blank" style="font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim);text-decoration:underline;text-underline-offset:8px">Ver todas as avaliações no Google →</a></div>
+</section>
+
+<!-- ============== FAQ ============== -->
+<section class="faq" id="faq">
+  <div class="section-head">
+    <div class="num r">08 / DÚVIDAS</div>
+    <h2 class="r">Pergunta<br>frequente.</h2>
+  </div>
+  <div class="faq-list">
+    <details class="faq-item r">
+      <summary><h3>Quanto custa uma revisão básica da minha moto?</h3><span class="ic">+</span></summary>
+      <div class="answer">Para Honda CG 160, Biz 125 e Pop 110, a revisão básica (óleo + filtro + checklist 12 pontos) sai em torno de <b style="color:var(--ink)">R$ 180 – R$ 240</b>. Para Bros e Fazer, varia entre R$ 240 e R$ 320. Use o configurador acima ou mande modelo + KM no WhatsApp que mando o orçamento exato em até 15 min.</div>
+    </details>
+    <details class="faq-item r">
+      <summary><h3>Vocês trabalham com peça original ou paralela?</h3><span class="ic">+</span></summary>
+      <div class="answer">As duas. <b style="color:var(--ink)">Você decide</b>. Mostro nota fiscal e foto da embalagem antes de instalar. Para peças críticas (freio, suspensão, motor) sempre recomendo original ou paralela homologada. Pra peças de desgaste, paralela testada economiza até 40%.</div>
+    </details>
+    <details class="faq-item r">
+      <summary><h3>Quanto tempo demora uma revisão?</h3><span class="ic">+</span></summary>
+      <div class="answer"><b style="color:var(--ink)">Pit Stop Express:</b> 90 minutos para revisão básica de moto popular. <b style="color:var(--ink)">Revisão completa</b> (com freio, corrente, embreagem): 2 a 4 horas. Trocas de peça grande (suspensão, motor): combinamos data e devolvemos no mesmo dia em 90% dos casos.</div>
+    </details>
+    <details class="faq-item r">
+      <summary><h3>Aceitam moto que está dando defeito que ninguém descobre?</h3><span class="ic">+</span></summary>
+      <div class="answer">Sim. <b style="color:var(--ink)">Diagnóstico técnico R$ 80</b> (abatido se fechar serviço). Usamos scanner de injeção, multímetro, pressão de óleo. Se não acharmos o problema, não cobramos o diagnóstico. Especialidade da casa.</div>
+    </details>
+    <details class="faq-item r">
+      <summary><h3>Vocês têm garantia? Onde é por escrito?</h3><span class="ic">+</span></summary>
+      <div class="answer"><b style="color:var(--ink)">3 garantias por escrito</b> em todo serviço: (1) 90 dias no serviço executado, (2) NF rastreável de cada peça, (3) zero surpresa de orçamento. Recibo impresso A5 entregue junto com a moto.</div>
+    </details>
+    <details class="faq-item r">
+      <summary><h3>Posso pagar parcelado?</h3><span class="ic">+</span></summary>
+      <div class="answer">Sim — débito, crédito em até 4x sem juros, Pix, dinheiro. Para revisão acima de R$ 800, parcelamos em até 6x sem juros pelo cartão. Combinado por WhatsApp antes de começar o serviço.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ============== CONTATO ============== -->
+<section class="contact" id="contato">
+  <div class="contact-grid">
+    <div>
+      <div class="num r" style="font-family:'Archivo Black';font-size:14px;color:var(--accent);margin-bottom:24px">06 / CONTATO</div>
+      <h2 class="r">Sua moto<br>merece <span class="y">o melhor.</span></h2>
+      <p class="lead r">Agende sua revisão pelo WhatsApp ou apareça pessoalmente. Atendimento de segunda a sábado.</p>
+      <div class="contact-cta r">
+        <a class="primary" href="https://wa.me/5511948280775" target="_blank">WhatsApp →</a>
+        <a href="https://instagram.com/gs_turbo_pit_stop" target="_blank">Instagram</a>
+        <a href="https://maps.google.com" target="_blank">Como chegar</a>
+      </div>
+    </div>
+    <div class="contact-info">
+      <div class="item"><div class="k">Endereço</div><div class="v">R. Pereira Barreto<br>Pista de Motocross · Sorocaba/SP</div></div>
+      <div class="item"><div class="k">Funcionamento</div><div class="v">Aberto agora · Fecha 00h<br>7 dias por semana</div></div>
+      <div class="item"><div class="k">WhatsApp</div><div class="v"><a href="https://wa.me/5511948280775" target="_blank">(11) 94828-0775</a></div></div>
+      <div class="item"><div class="k">Avaliação Google</div><div class="v"><a href="https://www.google.com/maps/search/gs+turbo+pit+stop+sorocaba" target="_blank">★ 5.0 · "sem enrolação"</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CUSTOM CURSOR + SOUND TOGGLE ============== -->
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<button class="sound-toggle" id="soundToggle" title="Ativar som" aria-label="Som on/off">🔇</button>
+
+<!-- ============== STICKY WHATSAPP ============== -->
+<a class="sticky-wa" href="https://wa.me/5511948280775?text=Ol%C3%A1!%20Vim%20do%20site%20da%20GS%20Turbo%20Pit%20Stop%20e%20quero%20um%20or%C3%A7amento" target="_blank" rel="noopener">
+  <span class="pulse"></span>
+  <svg viewBox="0 0 32 32"><path d="M16 .4C7.4.4.4 7.4.4 16c0 3 .8 5.8 2.3 8.3L0 32l7.9-2.6c2.4 1.3 5.2 2.1 8.1 2.1 8.6 0 15.6-7 15.6-15.6S24.6.4 16 .4zm0 28.4c-2.7 0-5.2-.7-7.4-2L4 28.2l1.5-4.4C4 21.5 3.2 18.8 3.2 16 3.2 8.9 9 3.1 16 3.1S28.8 8.9 28.8 16 23 28.8 16 28.8zm7.3-9.6c-.4-.2-2.4-1.2-2.7-1.3-.4-.1-.7-.2-.9.2s-1 1.3-1.3 1.6c-.2.2-.5.3-.9.1-.4-.2-1.7-.6-3.2-2-1.2-1-2-2.3-2.2-2.7-.2-.4 0-.6.2-.8.2-.2.4-.5.6-.7l.3-.5c.1-.2.1-.4 0-.6 0-.2-.9-2.2-1.3-3-.3-.8-.6-.7-.9-.7h-.7c-.2 0-.6.1-.9.5s-1.2 1.2-1.2 2.9 1.2 3.4 1.4 3.6c.2.2 2.5 3.8 6 5.3 2.1.9 2.9.9 4 .8.6-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.1-.4-.2-.8-.4z"/></svg>
+  Falar agora
+</a>
+
+<footer>
+  <div class="l">
+    <span>© 2026 GS Turbo Pit Stop</span>
+    <span>CNPJ 00.000.000/0001-00</span>
+  </div>
+  <div>Made with grease & precision</div>
+</footer>
+
+<!-- =================== CINEMATIC FRAMES (PNG sequence) =================== -->
+<script>
+(function(){
+  const wrap = document.getElementById('cineSvgWrap');
+  const cineSection = document.getElementById('cine');
+  if(!wrap || !cineSection) return;
+
+  const cineFill = document.getElementById('cineFill');
+  const cineStage = document.getElementById('cineStage');
+  const cineLabel0 = document.getElementById('cineLabel0');
+  const cineLabel1 = document.getElementById('cineLabel1');
+  const cineLabel2 = document.getElementById('cineLabel2');
+  const cineTrail = document.getElementById('cineTrail');
+  const stageEls = document.querySelectorAll('.cine-overlay .bottom .stage');
+  const frames = Array.from(wrap.querySelectorAll('.cineFrame'));
+  const FRAMES = frames.length;
+
+  function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+  function easeInOutCubic(t){return t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
+
+  let scrollProgress = 0;
+  let trailFired = false;
+
+  function update(){
+    const eased = easeInOutCubic(scrollProgress);
+    const f = clamp(eased * (FRAMES - 1), 0, FRAMES - 1);
+    const lo = Math.floor(f);
+    const hi = Math.min(lo + 1, FRAMES - 1);
+    const t = f - lo;
+    frames.forEach((img, i) => {
+      let op = 0;
+      if(i === lo) op = 1 - t;
+      else if(i === hi) op = t;
+      img.style.opacity = String(op);
+    });
+  }
+
+  function onScroll(){
+    const r = cineSection.getBoundingClientRect();
+    const total = r.height - window.innerHeight;
+    const scrolled = -r.top;
+    const p = clamp(scrolled / total, 0, 1);
+    scrollProgress = p;
+
+    if(cineFill) cineFill.style.width = (p*100) + '%';
+
+    // 6 stage labels — 1 per assembly frame (synced with frame crossfade)
+    const labels = [
+      document.getElementById('cineLabel0'),
+      document.getElementById('cineLabel1'),
+      document.getElementById('cineLabel2'),
+      document.getElementById('cineLabel3'),
+      document.getElementById('cineLabel4'),
+      document.getElementById('cineLabel5')
+    ];
+    const stageNames = ['CHASSIS','MOTOR','SUSPENSÃO','TANQUE','PRONTA','RIDE-OFF'];
+    let labelIdx = 0;
+    if(p < 0.16) labelIdx = 0;
+    else if(p < 0.32) labelIdx = 1;
+    else if(p < 0.50) labelIdx = 2;
+    else if(p < 0.66) labelIdx = 3;
+    else if(p < 0.85) labelIdx = 4;
+    else labelIdx = 5;
+    labels.forEach((el,i)=>{ if(el) el.classList.toggle('on', i===labelIdx); });
+    if(cineStage) cineStage.textContent = stageNames[labelIdx];
+
+    let activeStage = 0;
+    if(p > 0.22 && p < 0.85) activeStage = 1;
+    else if(p >= 0.85) activeStage = 2;
+    stageEls.forEach((el,i)=>el.classList.toggle('on', i===activeStage));
+
+    if(p > 0.93 && !trailFired){
+      cineTrail.classList.add('on'); trailFired = true;
+      setTimeout(()=>cineTrail.classList.remove('on'), 1400);
+    }
+    if(p < 0.85) trailFired = false;
+
+    update();
+  }
+
+  // preload all frames before activating
+  let loaded = 0;
+  frames.forEach((img) => {
+    if(img.complete && img.naturalWidth > 0){ loaded++; }
+    else {
+      img.addEventListener('load', () => { loaded++; });
+    }
+  });
+
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  // Brand reveal trigger
+  const revealEl = document.getElementById('reveal');
+  if(revealEl){
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ revealEl.classList.add('on'); obs.unobserve(revealEl); }
+      });
+    },{threshold:.35});
+    obs.observe(revealEl);
+  }
+})();
+</script>
+
+<!-- =================== CONFIGURATOR (Photo + Zoom) =================== -->
+<script>
+(function(){
+  const bikePhoto = document.getElementById('bikePhoto');
+  const bikeImg = document.getElementById('bikeImg');
+  const partLabel = document.getElementById('partLabel');
+  const hotspots = document.querySelectorAll('.hot');
+  if(!bikePhoto || !bikeImg) return;
+
+  const STATE = { bikeMult: 1, selected: new Set(), bikeKey: 'cg160' };
+
+  // Map model key -> photo path
+  const BIKE_PHOTOS = {
+    cg160:    'assets/bikes/cg160.jpg',
+    biz125:   'assets/bikes/biz125.jpg',
+    pop110:   'assets/bikes/pop110.jpg',
+    bros160:  'assets/bikes/bros160.jpg',
+    fazer250: 'assets/bikes/fazer250.jpg',
+    xre300:   'assets/bikes/xre300.jpg'
+  };
+
+  // Each part: focal point %, zoom, descriptive copy
+  const PART_FOCUS = {
+    oleo:      {x:54, y:60, zoom:2.0, eyebrow:'CARTER + FILTRO', desc:'Óleo sintético 10W40 + filtro novo. Recomendado a cada 3.000 km.'},
+    freio:     {x:80, y:78, zoom:1.9, eyebrow:'FREIO DIANTEIRO + TRASEIRO', desc:'Pastilhas + sangria + ajuste de manete. Segurança não é detalhe.'},
+    suspensao: {x:78, y:55, zoom:2.0, eyebrow:'BENGALA + AMORTECEDOR', desc:'Revisão da suspensão dianteira e traseira + retentor.'},
+    corrente:  {x:30, y:73, zoom:2.4, eyebrow:'KIT RELAÇÃO COMPLETO', desc:'Lubrificação + tensionamento + alinhamento. Quebra de corrente é prejuízo.'},
+    embreagem: {x:50, y:65, zoom:2.3, eyebrow:'DISCOS + AJUSTE', desc:'Discos novos + ajuste de cabo + sangria hidráulica.'},
+    pneu:      {x:50, y:82, zoom:1.6, eyebrow:'DIANTEIRO + TRASEIRO', desc:'Mão de obra + balanceamento. Pneu certo pra cada perfil.'},
+    vela:      {x:55, y:55, zoom:2.4, eyebrow:'VELAS + FILTRO DE AR', desc:'Limpeza + troca de velas + filtro novo. Volta a ter força.'},
+    custom:    {x:42, y:36, zoom:1.5, eyebrow:'PONTEIRA + GUIDÃO', desc:'Escape esportivo, guidão, manopla, mão de obra inclusa.'}
+  };
+
+  const partsListEl = document.getElementById('partsList');
+  const cartEl = document.getElementById('cart');
+  const totalPriceEl = document.getElementById('totalPrice');
+  const totalTimeEl = document.getElementById('totalTime');
+  const goWaEl = document.getElementById('goWa');
+  const hintBot = document.getElementById('hintBot');
+  const bikeLabel = document.getElementById('bikeLabel');
+
+  const PARTS_INDEX = {};
+  document.querySelectorAll('.part').forEach(b=>{
+    PARTS_INDEX[b.dataset.id] = {
+      id: b.dataset.id,
+      name: b.querySelector('.nm').textContent,
+      base: parseFloat(b.dataset.base),
+      time: parseInt(b.dataset.time, 10),
+      el: b
+    };
+  });
+
+  function fmt(v){ return 'R$ ' + Math.round(v).toLocaleString('pt-BR'); }
+
+  function applyZoom(){
+    const last = [...STATE.selected].pop();
+    hotspots.forEach(h => h.classList.toggle('on', STATE.selected.has(h.dataset.cat)));
+
+    if(!last){
+      bikePhoto.classList.remove('zoomed');
+      bikeImg.style.transform = 'scale(1)';
+      bikeImg.style.transformOrigin = '50% 50%';
+      partLabel.innerHTML = '';
+      return;
+    }
+    const f = PART_FOCUS[last] || PART_FOCUS.oleo;
+    const p = PARTS_INDEX[last];
+    bikePhoto.classList.add('zoomed');
+    bikePhoto.style.setProperty('--fx', f.x + '%');
+    bikePhoto.style.setProperty('--fy', f.y + '%');
+    bikeImg.style.transformOrigin = `${f.x}% ${f.y}%`;
+    bikeImg.style.transform = `scale(${f.zoom})`;
+    partLabel.innerHTML = `
+      <div class="pl-eyebrow">${f.eyebrow}</div>
+      <div class="pl-name">${p ? p.name : ''}</div>
+      <div class="pl-desc">${f.desc}</div>
+      <div class="pl-price">${p ? fmt(p.base*STATE.bikeMult) : ''}</div>`;
+  }
+
+  function currentBikeName(){
+    const a = document.querySelector('.bike-pick.on');
+    return a ? a.querySelector('.nm').textContent + ' (' + a.querySelector('.cc').textContent + ')' : 'Não informado';
+  }
+
+  function render(){
+    Object.values(PARTS_INDEX).forEach(p => p.el.classList.toggle('on', STATE.selected.has(p.id)));
+
+    if(STATE.selected.size === 0){
+      cartEl.innerHTML = '<div class="cart-empty">Nenhuma peça selecionada</div>';
+    } else {
+      cartEl.innerHTML = '';
+      STATE.selected.forEach(id=>{
+        const p = PARTS_INDEX[id];
+        const row = document.createElement('div');
+        row.className = 'cart-item';
+        row.innerHTML = `<span class="nm">${p.name}</span><span><span class="pr">${fmt(p.base*STATE.bikeMult)}</span><button data-rm="${id}">×</button></span>`;
+        cartEl.appendChild(row);
+      });
+      cartEl.querySelectorAll('button[data-rm]').forEach(b=>{
+        b.onclick = ()=>{ STATE.selected.delete(b.dataset.rm); render(); };
+      });
+    }
+
+    let price = 0, time = 0;
+    STATE.selected.forEach(id=>{
+      const p = PARTS_INDEX[id];
+      price += p.base * STATE.bikeMult;
+      time += p.time;
+    });
+    totalPriceEl.textContent = fmt(price);
+    totalTimeEl.textContent = time === 0 ? '0 min' : (time >= 60 ? `${Math.floor(time/60)}h${time%60? ' '+(time%60)+'min':''}` : `${time} min`);
+
+    if(STATE.selected.size === 0){
+      hintBot.textContent = 'Clique nas peças destacadas';
+    } else {
+      const last = [...STATE.selected].pop();
+      hintBot.textContent = `Destaque: ${PARTS_INDEX[last].name.toUpperCase()}`;
+    }
+
+    let msg = `Olá! Quero agendar minha revisão na GS Turbo Pit Stop.
+
+MODELO: ${currentBikeName()}
+
+ITENS:`;
+    STATE.selected.forEach(id=>{ msg += `
+• ${PARTS_INDEX[id].name} — ${fmt(PARTS_INDEX[id].base*STATE.bikeMult)}`; });
+    msg += `
+
+TOTAL ESTIMADO: ${fmt(price)}
+TEMPO: ${totalTimeEl.textContent}`;
+    goWaEl.href = `https://wa.me/5511948280775?text=${encodeURIComponent(msg)}`;
+
+    applyZoom();
+  }
+
+  partsListEl.addEventListener('click', e=>{
+    const b = e.target.closest('.part');
+    if(!b) return;
+    const id = b.dataset.id;
+    if(STATE.selected.has(id)) STATE.selected.delete(id);
+    else STATE.selected.add(id);
+    render();
+  });
+
+  document.getElementById('bikePicker').addEventListener('click', e=>{
+    const b = e.target.closest('.bike-pick');
+    if(!b) return;
+    document.querySelectorAll('.bike-pick').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    STATE.bikeMult = parseFloat(b.dataset.mult);
+    STATE.bikeKey = b.dataset.bike;
+    bikeLabel.textContent = `${b.querySelector('.nm').textContent.toUpperCase()} · ${b.querySelector('.cc').textContent}`;
+    // swap photo
+    const photo = BIKE_PHOTOS[b.dataset.bike];
+    if(photo){
+      bikeImg.style.opacity = '0';
+      setTimeout(()=>{
+        bikeImg.src = photo;
+        bikeImg.style.opacity = '1';
+      }, 250);
+    }
+    render();
+  });
+
+  document.querySelectorAll('.preset').forEach(p=>{
+    p.addEventListener('click', ()=>{
+      STATE.selected = new Set(p.dataset.set.split(','));
+      render();
+    });
+  });
+
+  // hotspot click also toggles part
+  hotspots.forEach(h => {
+    h.addEventListener('click', () => {
+      const cat = h.dataset.cat;
+      if(STATE.selected.has(cat)) STATE.selected.delete(cat);
+      else STATE.selected.add(cat);
+      render();
+    });
+  });
+
+  render();
+})();
+</script>
+
+<!-- =================== REVEAL ON SCROLL + STATS COUNTER + SMOOTH SCROLL =================== -->
+<script>
+(function(){
+  // Reveal on scroll for all .r elements
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); }
+    });
+  },{threshold:.12, rootMargin:'0px 0px -10% 0px'});
+  document.querySelectorAll('.r').forEach(el=>io.observe(el));
+
+  // Stats counter animation
+  const sio = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseFloat(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      if(!target) return;
+      const dur = 1400, t0 = performance.now();
+      function step(t){
+        const k = Math.min(1, (t-t0)/dur);
+        const eased = 1 - Math.pow(1-k, 3);
+        el.textContent = Math.floor(target * eased).toLocaleString('pt-BR') + suffix;
+        if(k<1) requestAnimationFrame(step);
+        else el.textContent = Math.round(target).toLocaleString('pt-BR') + suffix;
+      }
+      requestAnimationFrame(step);
+      sio.unobserve(el);
+    });
+  },{threshold:.4});
+  document.querySelectorAll('.stat .num[data-target]').forEach(el=>sio.observe(el));
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id = a.getAttribute('href').slice(1);
+      if(!id) return;
+      const t = document.getElementById(id);
+      if(!t) return;
+      e.preventDefault();
+      t.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  /* ====== INTRO ORCHESTRATION ====== */
+  const introEl = document.getElementById('intro');
+  const introSkip = document.getElementById('introSkip');
+  if(introEl){
+    document.body.style.overflow = 'hidden';
+    function endIntro(){
+      introEl.classList.add('split');
+      setTimeout(()=>{
+        introEl.classList.add('gone');
+        document.body.style.overflow = '';
+        setTimeout(()=>introEl.remove(), 1200);
+      }, 950);
+    }
+    setTimeout(endIntro, 2400);
+    if(introSkip) introSkip.addEventListener('click', endIntro);
+  }
+
+  /* ====== SCRATCH CARD — canvas trail persistente que "raspa" e revela a moto ====== */
+  document.querySelectorAll('.scratch').forEach(sec=>{
+    const bike = sec.dataset.bike;
+    if(!bike) return;
+    // Inject photo layer
+    const photo = document.createElement('div');
+    photo.className = 'scratch-photo';
+    photo.style.backgroundImage = `url('${bike}')`;
+    sec.insertBefore(photo, sec.firstChild);
+    // Inject canvas mask (over photo)
+    const canvas = document.createElement('canvas');
+    canvas.className = 'scratch-mask';
+    sec.insertBefore(canvas, photo.nextSibling);
+    const ctx = canvas.getContext('2d');
+    let lastX=null, lastY=null;
+    function fillBlack(){
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = '#0a0a0a';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    function resize(){
+      const r = sec.getBoundingClientRect();
+      canvas.width = r.width;
+      canvas.height = r.height;
+      fillBlack();
+    }
+    resize();
+    new ResizeObserver(resize).observe(sec);
+    let revealed = false;
+    let scratchCount = 0;
+    function checkProgress(){
+      if(revealed) return;
+      try{
+        const w = canvas.width, h = canvas.height;
+        if(w === 0 || h === 0) return;
+        // Sample on a sparse grid for perf
+        const step = 24;
+        const data = ctx.getImageData(0, 0, w, h).data;
+        let scratched = 0, total = 0;
+        for(let y = 0; y < h; y += step){
+          for(let x = 0; x < w; x += step){
+            const i = (y * w + x) * 4 + 3;
+            if(data[i] < 50) scratched++;
+            total++;
+          }
+        }
+        const ratio = scratched / total;
+        if(ratio > 0.22){
+          revealed = true;
+          canvas.classList.add('revealed');
+          setTimeout(()=>{ canvas.style.display = 'none'; }, 1500);
+        }
+      }catch(e){}
+    }
+    function scratchAt(x, y){
+      if(revealed) return;
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.lineWidth = 110;
+      ctx.strokeStyle = 'rgba(0,0,0,1)';
+      if(lastX !== null){
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      }
+      ctx.beginPath();
+      ctx.arc(x, y, 55, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(0,0,0,1)';
+      ctx.fill();
+      lastX = x; lastY = y;
+      scratchCount++;
+      if(scratchCount % 8 === 0) checkProgress();
+    }
+    sec.addEventListener('mousemove', e=>{
+      const r = sec.getBoundingClientRect();
+      scratchAt(e.clientX-r.left, e.clientY-r.top);
+    }, {passive:true});
+    sec.addEventListener('mouseleave', ()=>{ lastX=null; lastY=null; });
+    sec.addEventListener('touchmove', e=>{
+      const t = e.touches[0]; if(!t) return;
+      const r = sec.getBoundingClientRect();
+      scratchAt(t.clientX-r.left, t.clientY-r.top);
+    }, {passive:true});
+    sec.addEventListener('touchend', ()=>{ lastX=null; lastY=null; });
+    // Reset button: dbl-click to reset the scratch
+    sec.addEventListener('dblclick', ()=>{ fillBlack(); lastX=null; lastY=null; });
+  });
+
+  /* ====== CUSTOM CURSOR ====== */
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  const isFinePointer = matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(isFinePointer && dot && ring){
+    let mx=window.innerWidth/2, my=window.innerHeight/2, rx=mx, ry=my;
+    document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`; });
+    function tick(){ rx += (mx-rx)*0.18; ry += (my-ry)*0.18; ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`; ring.style.setProperty('--rx',rx+'px'); ring.style.setProperty('--ry',ry+'px'); requestAnimationFrame(tick); }
+    tick();
+    const hotSel = 'a, button, .hot, .part, .cpart, .bike-pick, .preset, .faq-item summary, input, textarea, [role="button"]';
+    document.body.addEventListener('mouseover', e=>{ if(e.target.closest && e.target.closest(hotSel)){ dot.classList.add('hot'); ring.classList.add('hot'); } });
+    document.body.addEventListener('mouseout', e=>{ if(e.target.closest && e.target.closest(hotSel) && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(hotSel))){ dot.classList.remove('hot'); ring.classList.remove('hot'); } });
+    document.addEventListener('click', ()=>{ ring.classList.remove('click-pulse'); void ring.offsetWidth; ring.classList.add('click-pulse'); });
+  }
+
+  /* ====== SOUND DESIGN (Web Audio synthesis) ====== */
+  let soundOn = false;
+  let actx = null;
+  function ctx(){ if(!actx){ try{ actx = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){return null;} } return actx; }
+  function blip(type, freq, dur, vol=0.10){
+    if(!soundOn) return;
+    const c = ctx(); if(!c) return;
+    const o = c.createOscillator(), g = c.createGain();
+    o.type = type;
+    o.frequency.setValueAtTime(freq, c.currentTime);
+    g.gain.setValueAtTime(vol, c.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime+dur);
+    o.connect(g).connect(c.destination);
+    o.start(); o.stop(c.currentTime+dur);
+  }
+  const SFX = {
+    tic:    ()=>blip('square', 1400, 0.03, 0.05),
+    click:  ()=>{ blip('square', 800, 0.05, 0.07); setTimeout(()=>blip('square', 1200, 0.03, 0.04), 25); },
+    clank:  ()=>{ blip('sawtooth', 180, 0.15, 0.12); setTimeout(()=>blip('triangle', 420, 0.10, 0.08), 30); setTimeout(()=>blip('triangle', 720, 0.08, 0.05), 70); },
+    swoosh: ()=>{ blip('sine', 90, 0.35, 0.10); }
+  };
+  // Sound toggle button
+  const sToggle = document.getElementById('soundToggle');
+  if(sToggle){
+    sToggle.addEventListener('click', ()=>{
+      soundOn = !soundOn;
+      sToggle.classList.toggle('on', soundOn);
+      sToggle.textContent = soundOn ? '🔊' : '🔇';
+      sToggle.title = soundOn ? 'Desligar som' : 'Ativar som';
+      if(soundOn){ ctx() && ctx().resume(); SFX.click(); }
+    });
+  }
+  // Bind hover/click sounds
+  document.addEventListener('mouseover', e=>{
+    if(e.target.closest && e.target.closest('a, button, .hot, .part, .bike-pick, .preset, .feed-cell, .svc, .gtt')) SFX.tic();
+  });
+  document.querySelectorAll('.hot, .part, .bike-pick, .preset, .faq-item summary').forEach(el=>{
+    el.addEventListener('click', SFX.clank);
+  });
+  document.querySelectorAll('a, button').forEach(el=>{
+    el.addEventListener('click', SFX.click);
+  });
+
+  /* ====== HOVER PARALLAX 3D CARDS ====== */
+  const parallaxSel = '.svc, .gtt, .rev, .feed-cell, .bike-pick, .part';
+  document.querySelectorAll(parallaxSel).forEach(card=>{
+    card.addEventListener('mousemove', e=>{
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX-r.left)/r.width - 0.5;
+      const y = (e.clientY-r.top)/r.height - 0.5;
+      card.style.setProperty('--ry', `${x*9}deg`);
+      card.style.setProperty('--rx', `${-y*9}deg`);
+      card.style.setProperty('--tz', '12px');
+    });
+    card.addEventListener('mouseleave', ()=>{
+      card.style.setProperty('--ry','0deg');
+      card.style.setProperty('--rx','0deg');
+      card.style.setProperty('--tz','0');
+    });
+  });
+
+  /* ====== KINETIC TYPE: hero stroke turns red as cinematic enters ====== */
+  const heroEl = document.querySelector('.hero');
+  const cineEl = document.getElementById('cine');
+  if(heroEl && cineEl){
+    const ko = new IntersectionObserver(es=>{ es.forEach(e=>heroEl.classList.toggle('scrolled', e.isIntersecting)); },{rootMargin:'-30% 0px 0px 0px'});
+    ko.observe(cineEl);
+  }
+
+  /* ====== CINEMATIC PARALLAX DEPTH activator ====== */
+  const cineSec = document.querySelector('.cinematic');
+  if(cineSec){
+    const cino = new IntersectionObserver(es=>{ es.forEach(e=>cineSec.classList.toggle('in-view', e.isIntersecting)); },{threshold:.1});
+    cino.observe(cineSec);
+  }
+})();
+</script>
+
+</body>
+</html>
